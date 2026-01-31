@@ -1,0 +1,16 @@
+node_modules
+.DS_Store
+.env
+.env.*
+!.env.example
+dist
+.svelte-kit
+.wrangler
+.turbo
+
+# Secrets - wrangler.toml contains password hash, JWT secret, database IDs
+apps/web/wrangler.toml
+
+# Claude Code local settings (may contain permissions)
+.claude/settings.local.json
+.claude/plans/

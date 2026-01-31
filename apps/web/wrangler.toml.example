@@ -1,0 +1,17 @@
+name = "chronomd"
+compatibility_date = "2024-01-01"
+compatibility_flags = ["nodejs_compat"]
+pages_build_output_dir = ".svelte-kit/cloudflare"
+
+[vars]
+ADMIN_PASSWORD_HASH = "your-sha256-password-hash"
+JWT_SECRET = "your-jwt-secret-key"
+
+[[d1_databases]]
+binding = "DB"
+database_name = "chronomd-db"
+database_id = "your-d1-database-id"
+
+[[r2_buckets]]
+binding = "BUCKET"
+bucket_name = "chronomd-storage"

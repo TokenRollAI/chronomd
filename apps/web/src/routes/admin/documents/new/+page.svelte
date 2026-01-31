@@ -1,0 +1,140 @@
+<script lang="ts">
+  import { goto } from '$app/navigation';
+  import { adminApi, type Folder } from '$lib/api';
+  import { onMount } from 'svelte';
+
+  let title = '';
+  let slug = '';
+  let summary = '';
+  let content = '# Hello World\n\nStart writing your document here...';
+  let folderId = '';
+  let isPublished = false;
+  let isPrivate = false;
+  let accessCode = '';
+
+  let folders: Folder[] = [];
+  let saving = false;
+  let error = '';
+
+  onMount(async () => {
+    folders = await adminApi.getFolders();
+  });
+
+  async function handleSubmit() {
+    if (!title.trim()) {
+      error = 'Title is required';
+      return;
+    }
+    if (!content.trim()) {
+      error = 'Content is required';
+      return;
+    }
+
+    saving = true;
+    error = '';
+
+    try {
+      const doc = await adminApi.createDocument({
+        title,
+        slug: slug || undefined,
+        summary: summary || undefined,
+        content,
+        folder_id: folderId || undefined,
+        is_published: isPublished,
+        is_private: isPrivate,
+        access_code: isPrivate && accessCode ? accessCode : undefined
+      });
+      goto(`/admin/documents/${doc.id}`);
+    } catch (err) {
+      error = 'Failed to create document';
+    } finally {
+      saving = false;
+    }
+  }
+</script>
+
+<svelte:head>
+  <title>New Document - ChronoMD Admin</title>
+</svelte:head>
+
+<div class="p-8">
+  <div class="flex items-center justify-between mb-8">
+    <h1 class="text-2xl font-bold text-gray-900">New Document</h1>
+    <a href="/admin/documents" class="text-gray-500 hover:text-gray-700">Cancel</a>
+  </div>
+
+  <form on:submit|preventDefault={handleSubmit} class="max-w-4xl">
+    {#if error}
+      <div class="bg-red-50 text-red-700 px-4 py-3 rounded-lg mb-6">{error}</div>
+    {/if}
+
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+        <div>
+          <label for="title" class="form-label">Title *</label>
+          <input type="text" id="title" bind:value={title} class="form-input" required />
+        </div>
+        <div>
+          <label for="slug" class="form-label">Slug (optional)</label>
+          <input type="text" id="slug" bind:value={slug} class="form-input" placeholder="auto-generated" />
+        </div>
+      </div>
+
+      <div class="mt-6">
+        <label for="summary" class="form-label">Summary (optional)</label>
+        <input type="text" id="summary" bind:value={summary} class="form-input" />
+      </div>
+
+      <div class="mt-6">
+        <label for="folder" class="form-label">Folder (optional)</label>
+        <select id="folder" bind:value={folderId} class="form-input">
+          <option value="">No folder</option>
+          {#each folders as folder}
+            <option value={folder.id}>{folder.name}</option>
+          {/each}
+        </select>
+      </div>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+      <label for="content" class="form-label">Content *</label>
+      <textarea
+        id="content"
+        bind:value={content}
+        class="form-input font-mono text-sm"
+        rows="20"
+        required
+      ></textarea>
+    </div>
+
+    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6">
+      <h3 class="font-medium text-gray-900 mb-4">Publishing Options</h3>
+
+      <div class="space-y-4">
+        <label class="flex items-center gap-3">
+          <input type="checkbox" bind:checked={isPublished} class="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500" />
+          <span>Publish immediately</span>
+        </label>
+
+        <label class="flex items-center gap-3">
+          <input type="checkbox" bind:checked={isPrivate} class="w-4 h-4 rounded border-gray-300 text-primary-600 focus:ring-primary-500" />
+          <span>Private (requires access code)</span>
+        </label>
+
+        {#if isPrivate}
+          <div class="ml-7">
+            <label for="accessCode" class="form-label">Access Code</label>
+            <input type="text" id="accessCode" bind:value={accessCode} class="form-input" placeholder="Enter access code" />
+          </div>
+        {/if}
+      </div>
+    </div>
+
+    <div class="flex justify-end gap-4">
+      <a href="/admin/documents" class="btn btn-secondary">Cancel</a>
+      <button type="submit" class="btn btn-primary" disabled={saving}>
+        {saving ? 'Creating...' : 'Create Document'}
+      </button>
+    </div>
+  </form>
+</div>
