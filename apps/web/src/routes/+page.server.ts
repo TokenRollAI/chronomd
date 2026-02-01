@@ -1,12 +1,16 @@
 import type { PageServerLoad } from './$types';
-import { getTimeline, getFolderBySlug, getSettings } from '$lib/server/db';
+import { getMixedTimeline, getFolderBySlug, getSettings } from '$lib/server/db';
+import { verifyToken } from '$lib/server/auth';
 
-export const load: PageServerLoad = async ({ url, platform }) => {
+export const load: PageServerLoad = async ({ url, platform, cookies }) => {
   const db = platform?.env?.DB;
+  const jwtSecret = platform?.env?.JWT_SECRET;
+
   if (!db) {
     return {
       timeline: { items: [], total: 0, page: 1, limit: 20 },
-      settings: { site_title: 'ChronoMD', site_description: 'A minimalist personal Markdown publishing platform', site_subtitle: '', timezone: 'UTC', posts_per_page: '20' }
+      settings: { site_title: 'ChronoMD', site_description: 'A minimalist personal Markdown publishing platform', site_subtitle: '', timezone: 'UTC', posts_per_page: '20' },
+      isLoggedIn: false
     };
   }
 
@@ -22,7 +26,16 @@ export const load: PageServerLoad = async ({ url, platform }) => {
     if (folder) folderId = folder.id;
   }
 
-  const timeline = await getTimeline(db, { page, limit, folder_id: folderId });
+  const timeline = await getMixedTimeline(db, { page, limit, folder_id: folderId });
 
-  return { timeline, settings };
+  // Check login status
+  let isLoggedIn = false;
+  if (jwtSecret) {
+    const token = cookies.get('auth_token');
+    if (token) {
+      isLoggedIn = await verifyToken(token, jwtSecret);
+    }
+  }
+
+  return { timeline, settings, isLoggedIn };
 };

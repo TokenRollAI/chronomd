@@ -69,3 +69,28 @@ export interface SiteSettings {
   timezone: string;
   posts_per_page: string;
 }
+
+// Quick Notes
+export interface QuickNote {
+  id: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  is_archived: number;
+}
+
+// Mixed Timeline Item (documents + quick notes)
+export interface MixedTimelineItem {
+  type: 'document' | 'note';
+  id: string;
+  // Document fields
+  title?: string;
+  slug?: string;
+  summary?: string | null;
+  folder?: { id: string; name: string; slug: string } | null;
+  is_private?: boolean;
+  // Note fields
+  content?: string;
+  // Common
+  published_at: string;
+}

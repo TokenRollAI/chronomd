@@ -42,6 +42,9 @@ export const api = {
   getTimeline: (params?: { page?: number; limit?: number; folder?: string }) =>
     request<{ items: TimelineItem[]; total: number; page: number; limit: number }>('/api/timeline', { params }),
 
+  getMixedTimeline: (params?: { page?: number; limit?: number; folder?: string }) =>
+    request<{ items: MixedTimelineItem[]; total: number; page: number; limit: number }>('/api/mixed-timeline', { params }),
+
   getFolders: () => request<FolderTree[]>('/api/folders'),
 
   getDocument: (slug: string, unlockedSlugs: string[] = []) =>
@@ -111,7 +114,26 @@ export const adminApi = {
     request<{ message: string }>('/api/admin/settings', {
       method: 'PUT',
       body: JSON.stringify(settings)
-    })
+    }),
+
+  // Quick Notes
+  getQuickNotes: (params?: { page?: number; limit?: number; archived?: boolean }) =>
+    request<{ items: QuickNote[]; total: number; page: number; limit: number }>('/api/admin/quick-notes', { params }),
+
+  createQuickNote: (content: string) =>
+    request<QuickNote>('/api/admin/quick-notes', {
+      method: 'POST',
+      body: JSON.stringify({ content })
+    }),
+
+  updateQuickNote: (id: string, data: { content?: string; is_archived?: boolean }) =>
+    request<QuickNote>(`/api/admin/quick-notes/${id}`, {
+      method: 'PUT',
+      body: JSON.stringify(data)
+    }),
+
+  deleteQuickNote: (id: string) =>
+    request<{ message: string }>(`/api/admin/quick-notes/${id}`, { method: 'DELETE' })
 };
 
 // Types
@@ -211,4 +233,28 @@ export interface UpdateFolderInput {
   slug?: string;
   parent_id?: string | null;
   sort_order?: number;
+}
+
+// Quick Notes Types
+export interface QuickNote {
+  id: string;
+  content: string;
+  created_at: string;
+  updated_at: string;
+  is_archived: number;
+}
+
+export interface MixedTimelineItem {
+  type: 'document' | 'note';
+  id: string;
+  // Document fields
+  title?: string;
+  slug?: string;
+  summary?: string | null;
+  folder?: { id: string; name: string; slug: string } | null;
+  is_private?: boolean;
+  // Note fields
+  content?: string;
+  // Common
+  published_at: string;
 }

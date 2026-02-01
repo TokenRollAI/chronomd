@@ -1,4 +1,4 @@
-import type { Env, Folder, FolderTree, Document, TimelineItem, DocumentDetail, SiteSettings } from './types';
+import type { Env, Folder, FolderTree, Document, TimelineItem, DocumentDetail, SiteSettings, QuickNote, MixedTimelineItem } from './types';
 import { generateId, generateSlug, slugify, hashPassword, verifyPassword } from './utils';
 
 // Settings
@@ -275,3 +275,151 @@ export async function deleteDocument(db: D1Database, bucket: R2Bucket, id: strin
 
 type D1Database = import('@cloudflare/workers-types').D1Database;
 type R2Bucket = import('@cloudflare/workers-types').R2Bucket;
+
+// Quick Notes
+export async function createQuickNote(db: D1Database, content: string): Promise<QuickNote> {
+  const id = generateId();
+  const now = new Date().toISOString();
+
+  await db.prepare(
+    `INSERT INTO quick_notes (id, content, created_at, updated_at, is_archived) VALUES (?, ?, ?, ?, 0)`
+  ).bind(id, content, now, now).run();
+
+  return { id, content, created_at: now, updated_at: now, is_archived: 0 };
+}
+
+export async function getQuickNotes(db: D1Database, options: { page?: number; limit?: number; includeArchived?: boolean } = {}): Promise<{ items: QuickNote[]; total: number; page: number; limit: number }> {
+  const page = options.page || 1;
+  const limit = Math.min(options.limit || 20, 100);
+  const offset = (page - 1) * limit;
+
+  let query = 'SELECT * FROM quick_notes';
+  const params: unknown[] = [];
+
+  if (!options.includeArchived) {
+    query += ' WHERE is_archived = 0';
+  }
+
+  query += ' ORDER BY created_at DESC LIMIT ? OFFSET ?';
+  params.push(limit, offset);
+
+  const result = await db.prepare(query).bind(...params).all<QuickNote>();
+
+  let countQuery = 'SELECT COUNT(*) as count FROM quick_notes';
+  if (!options.includeArchived) {
+    countQuery += ' WHERE is_archived = 0';
+  }
+  const countResult = await db.prepare(countQuery).first<{ count: number }>();
+
+  return { items: result.results || [], total: countResult?.count || 0, page, limit };
+}
+
+export async function getQuickNoteById(db: D1Database, id: string): Promise<QuickNote | null> {
+  return db.prepare('SELECT * FROM quick_notes WHERE id = ?').bind(id).first<QuickNote>();
+}
+
+export async function updateQuickNote(db: D1Database, id: string, input: { content?: string; is_archived?: boolean }): Promise<QuickNote | null> {
+  const existing = await getQuickNoteById(db, id);
+  if (!existing) return null;
+
+  const updates: string[] = [];
+  const values: unknown[] = [];
+
+  if (input.content !== undefined) { updates.push('content = ?'); values.push(input.content); }
+  if (input.is_archived !== undefined) { updates.push('is_archived = ?'); values.push(input.is_archived ? 1 : 0); }
+
+  if (updates.length === 0) return existing;
+
+  updates.push('updated_at = ?');
+  values.push(new Date().toISOString());
+  values.push(id);
+
+  await db.prepare(`UPDATE quick_notes SET ${updates.join(', ')} WHERE id = ?`).bind(...values).run();
+  return getQuickNoteById(db, id);
+}
+
+export async function deleteQuickNote(db: D1Database, id: string): Promise<boolean> {
+  const result = await db.prepare('DELETE FROM quick_notes WHERE id = ?').bind(id).run();
+  return result.meta.changes > 0;
+}
+
+// Mixed Timeline (Documents + Quick Notes)
+export async function getMixedTimeline(db: D1Database, options: { page?: number; limit?: number; folder_id?: string } = {}): Promise<{ items: MixedTimelineItem[]; total: number; page: number; limit: number }> {
+  const page = options.page || 1;
+  const limit = Math.min(options.limit || 20, 100);
+  const offset = (page - 1) * limit;
+
+  // Build UNION query for documents and quick notes
+  let query = `
+    SELECT 'document' as type, d.id, d.title, d.slug, d.summary, d.is_private, d.published_at,
+           f.id as folder_id, f.name as folder_name, f.slug as folder_slug, NULL as content
+    FROM documents d
+    LEFT JOIN folders f ON d.folder_id = f.id
+    WHERE d.is_published = 1
+  `;
+
+  const params: unknown[] = [];
+
+  if (options.folder_id) {
+    query += ' AND d.folder_id = ?';
+    params.push(options.folder_id);
+  }
+
+  // Only include quick notes if no folder filter
+  if (!options.folder_id) {
+    query += `
+    UNION ALL
+    SELECT 'note' as type, id, NULL as title, NULL as slug, NULL as summary, 0 as is_private,
+           created_at as published_at, NULL as folder_id, NULL as folder_name, NULL as folder_slug, content
+    FROM quick_notes
+    WHERE is_archived = 0
+    `;
+  }
+
+  query += ' ORDER BY published_at DESC LIMIT ? OFFSET ?';
+  params.push(limit, offset);
+
+  const result = await db.prepare(query).bind(...params).all();
+
+  // Count total
+  let countQuery = 'SELECT COUNT(*) as count FROM documents WHERE is_published = 1';
+  const countParams: unknown[] = [];
+  if (options.folder_id) {
+    countQuery += ' AND folder_id = ?';
+    countParams.push(options.folder_id);
+  }
+
+  let totalDocs = 0;
+  let totalNotes = 0;
+
+  const docCountResult = await db.prepare(countQuery).bind(...countParams).first<{ count: number }>();
+  totalDocs = docCountResult?.count || 0;
+
+  if (!options.folder_id) {
+    const noteCountResult = await db.prepare('SELECT COUNT(*) as count FROM quick_notes WHERE is_archived = 0').first<{ count: number }>();
+    totalNotes = noteCountResult?.count || 0;
+  }
+
+  const items: MixedTimelineItem[] = (result.results || []).map((row: Record<string, unknown>) => {
+    if (row.type === 'note') {
+      return {
+        type: 'note' as const,
+        id: row.id as string,
+        content: row.content as string,
+        published_at: row.published_at as string
+      };
+    }
+    return {
+      type: 'document' as const,
+      id: row.id as string,
+      title: row.title as string,
+      slug: row.slug as string,
+      summary: row.summary as string | null,
+      is_private: Boolean(row.is_private),
+      published_at: row.published_at as string,
+      folder: row.folder_id ? { id: row.folder_id as string, name: row.folder_name as string, slug: row.folder_slug as string } : null
+    };
+  });
+
+  return { items, total: totalDocs + totalNotes, page, limit };
+}

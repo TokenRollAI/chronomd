@@ -52,12 +52,13 @@ ChronoMD 采用**前后端一体化**架构，所有代码都在一个 SvelteKit
 - `auth.ts`: JWT 令牌生成和验证
 - `db.ts`: D1 数据库 CRUD 操作
 - `utils.ts`: ID 生成、密码哈希、slug 处理
-- `types.ts`: TypeScript 类型定义
+- `types.ts`: TypeScript 类型定义（含 `QuickNote`, `MixedTimelineItem`）
 
 ### D1 数据库
-- 文档元数据存储
-- 文件夹结构存储
-- 站点设置存储
+- 文档元数据存储 (`documents` 表)
+- 文件夹结构存储 (`folders` 表)
+- 站点设置存储 (`settings` 表)
+- 快速笔记存储 (`quick_notes` 表)
 
 ### R2 存储
 - Markdown 内容存储 (`documents/{slug}.md`)
@@ -84,6 +85,26 @@ ChronoMD 采用**前后端一体化**架构，所有代码都在一个 SvelteKit
 5. 元数据写入 D1
 6. 内容写入 R2
 7. 返回创建结果
+```
+
+### Quick Notes 数据流
+```
+1. 首页加载流程:
+   - +page.server.ts 验证 JWT token 判断登录状态
+   - 已登录: 调用 getMixedTimeline 获取混合时间线
+   - 未登录: 调用 getTimeline 仅获取文档列表
+   - 渲染时根据 isLoggedIn 显示/隐藏 QuickNoteInput
+
+2. 创建笔记流程:
+   - 用户点击底部悬浮输入栏展开弹窗
+   - 输入内容 (500字限制，实时字数统计)
+   - POST /api/admin/quick-notes
+   - 验证 JWT -> 写入 D1 quick_notes 表
+   - 刷新时间线
+
+3. 混合时间线渲染:
+   - MixedTimelineItem.type === 'document' -> 文档卡片
+   - MixedTimelineItem.type === 'note' -> QuickNoteCard (带标签)
 ```
 
 ## 安全设计

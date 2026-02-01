@@ -1,12 +1,15 @@
 <script lang="ts">
   import type { PageData } from './$types';
-  import { formatDate } from '$lib/utils/markdown';
   import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+  import QuickNoteInput from '$lib/components/QuickNoteInput.svelte';
+  import QuickNoteCard from '$lib/components/QuickNoteCard.svelte';
+  import { invalidateAll } from '$app/navigation';
 
   export let data: PageData;
 
   $: timeline = data.timeline;
   $: settings = data.settings;
+  $: isLoggedIn = data.isLoggedIn;
 
   function groupByYear(items: typeof timeline.items) {
     const groups: { year: string; items: typeof items }[] = [];
@@ -25,6 +28,10 @@
   }
 
   $: yearGroups = groupByYear(timeline.items);
+
+  async function handleNoteCreated() {
+    await invalidateAll();
+  }
 </script>
 
 <svelte:head>
@@ -33,13 +40,15 @@
   <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&display=swap" rel="stylesheet">
 </svelte:head>
 
-<div class="min-h-screen bg-[#FAFAFA] dark:bg-stone-950 transition-colors">
+<div class="min-h-screen bg-[#FAFAFA] dark:bg-stone-950 transition-colors {isLoggedIn ? 'pb-20 md:pb-0' : ''}">
   <!-- Header -->
   <header class="h-16 md:h-20 px-5 md:px-12 flex items-center justify-between border-b border-[#E5E5E5] dark:border-stone-800 bg-white dark:bg-stone-900">
     <h1 class="text-xl md:text-2xl font-serif font-semibold text-[#1A1A1A] dark:text-stone-100">
       {settings.site_title}
     </h1>
-    <ThemeToggle />
+    <div class="flex items-center gap-4">
+      <ThemeToggle />
+    </div>
   </header>
 
   <!-- Main Content -->
@@ -83,26 +92,36 @@
             <span class="font-mono text-sm font-semibold text-[#1A1A1A] dark:text-stone-200">{group.year}</span>
           </div>
 
-          <!-- Document Pills -->
+          <!-- Mixed Timeline Items -->
           <div class="flex flex-col gap-3 mb-6">
             {#each group.items as item}
-              <a
-                href="/{item.slug}"
-                class="group inline-flex items-center gap-3 h-11 md:h-9 px-4 bg-white dark:bg-stone-900 rounded-full border border-[#E5E5E5] dark:border-stone-700 hover:border-[#0D6E6E] dark:hover:border-teal-500 transition-colors w-full md:w-fit"
-              >
-                <time class="font-mono text-xs text-[#888888] dark:text-stone-500 flex-shrink-0">
-                  {new Date(item.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
-                </time>
-                <span class="w-1 h-1 rounded-full bg-[#E5E5E5] dark:bg-stone-600 flex-shrink-0"></span>
-                <span class="text-sm font-medium text-[#1A1A1A] dark:text-stone-200 group-hover:text-[#0D6E6E] dark:group-hover:text-teal-400 transition-colors truncate">
-                  {item.title}
-                </span>
-                {#if item.is_private}
-                  <svg class="w-3 h-3 text-amber-400 ml-auto flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
-                    <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
-                  </svg>
-                {/if}
-              </a>
+              {#if item.type === 'note'}
+                <!-- Quick Note Card -->
+                <QuickNoteCard
+                  id={item.id}
+                  content={item.content || ''}
+                  createdAt={item.published_at}
+                />
+              {:else}
+                <!-- Document Pill -->
+                <a
+                  href="/{item.slug}"
+                  class="group inline-flex items-center gap-3 h-11 md:h-9 px-4 bg-white dark:bg-stone-900 rounded-full border border-[#E5E5E5] dark:border-stone-700 hover:border-[#0D6E6E] dark:hover:border-teal-500 transition-colors w-full md:w-fit"
+                >
+                  <time class="font-mono text-xs text-[#888888] dark:text-stone-500 flex-shrink-0">
+                    {new Date(item.published_at).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+                  </time>
+                  <span class="w-1 h-1 rounded-full bg-[#E5E5E5] dark:bg-stone-600 flex-shrink-0"></span>
+                  <span class="text-sm font-medium text-[#1A1A1A] dark:text-stone-200 group-hover:text-[#0D6E6E] dark:group-hover:text-teal-400 transition-colors truncate">
+                    {item.title}
+                  </span>
+                  {#if item.is_private}
+                    <svg class="w-3 h-3 text-amber-400 ml-auto flex-shrink-0" fill="currentColor" viewBox="0 0 20 20">
+                      <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+                    </svg>
+                  {/if}
+                </a>
+              {/if}
             {/each}
           </div>
         {/each}
@@ -130,9 +149,16 @@
   </main>
 
   <!-- Footer -->
-  <footer class="py-8 text-center">
-    <p class="text-xs text-[#CCCCCC] dark:text-stone-600">
-      Powered by <a href="https://github.com/chronomd/chronomd" class="hover:text-[#888888] dark:hover:text-stone-500 transition">ChronoMD</a>
-    </p>
-  </footer>
+  {#if !isLoggedIn}
+    <footer class="py-8 text-center">
+      <p class="text-xs text-[#CCCCCC] dark:text-stone-600">
+        Powered by <a href="https://github.com/chronomd/chronomd" class="hover:text-[#888888] dark:hover:text-stone-500 transition">ChronoMD</a>
+      </p>
+    </footer>
+  {/if}
+
+  <!-- Quick Note Input (only for logged in users) -->
+  {#if isLoggedIn}
+    <QuickNoteInput on:created={handleNoteCreated} />
+  {/if}
 </div>

@@ -58,6 +58,23 @@
 - `idx_documents_published`: is_published, published_at
 - `idx_documents_timeline`: is_published, is_private, published_at DESC
 
+### quick_notes - 快速笔记
+
+| 字段        | 类型    | 描述                 |
+|-------------|---------|----------------------|
+| id          | TEXT    | ID (主键)            |
+| content     | TEXT    | 笔记内容 (最大500字) |
+| is_archived | INTEGER | 是否归档 (0/1)       |
+| created_at  | TEXT    | 创建时间             |
+| updated_at  | TEXT    | 更新时间             |
+
+**迁移文件:** `migrations/0002_quick_notes.sql`
+
+**设计说明:**
+- 独立于 `documents` 表，专为轻量级快速记录设计
+- 无 slug、folder 等复杂字段
+- `is_archived` 用于软删除/归档功能
+
 ## R2 存储结构
 
 Markdown 内容存储在 R2：

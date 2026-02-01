@@ -14,18 +14,22 @@ chronomd/
 │       │   │   ├── server/          # 服务端代码
 │       │   │   │   ├── auth.ts      # JWT 认证
 │       │   │   │   ├── db.ts        # 数据库操作
-│       │   │   │   ├── types.ts     # 类型定义
+│       │   │   │   ├── types.ts     # 类型定义 (含 QuickNote, MixedTimelineItem)
 │       │   │   │   └── utils.ts     # 工具函数
 │       │   │   ├── stores/          # Svelte stores
 │       │   │   │   ├── auth.ts      # 认证状态
 │       │   │   │   └── theme.ts     # 暗色模式主题状态
 │       │   │   ├── components/      # UI 组件
-│       │   │   │   └── ThemeToggle.svelte  # 主题切换按钮
+│       │   │   │   ├── ThemeToggle.svelte     # 主题切换按钮
+│       │   │   │   ├── QuickNoteInput.svelte  # 快速笔记输入组件
+│       │   │   │   └── QuickNoteCard.svelte   # 快速笔记卡片组件
 │       │   │   └── utils/           # 前端工具
 │       │   └── routes/
 │       │       ├── api/             # API 路由 (+server.ts)
 │       │       ├── admin/           # 管理后台页面
 │       │       └── [slug]/          # 文档详情页
+│       ├── migrations/              # 数据库迁移文件
+│       │   └── 0002_quick_notes.sql # Quick Notes 表迁移
 │       └── wrangler.toml            # Cloudflare 配置
 ├── packages/
 │   └── cli/              # @chronomd/cli 命令行工具

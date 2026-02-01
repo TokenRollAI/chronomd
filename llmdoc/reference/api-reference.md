@@ -133,6 +133,50 @@
 
 ---
 
+### GET /api/mixed-timeline
+获取混合时间线（文档 + Quick Notes）
+
+**Query 参数:**
+| 参数   | 类型   | 必填 | 默认值 | 描述             |
+|--------|--------|------|--------|------------------|
+| page   | number | 否   | 1      | 页码             |
+| limit  | number | 否   | 20     | 每页数量 (max 100)|
+
+**响应:**
+```json
+{
+  "success": true,
+  "data": {
+    "items": [
+      {
+        "type": "document",
+        "id": "doc123",
+        "title": "文章标题",
+        "slug": "article-slug",
+        "summary": "摘要",
+        "is_private": false,
+        "published_at": "2024-01-01T00:00:00.000Z"
+      },
+      {
+        "type": "note",
+        "id": "note456",
+        "content": "快速笔记内容",
+        "is_archived": false,
+        "created_at": "2024-01-02T00:00:00.000Z"
+      }
+    ],
+    "total": 42,
+    "page": 1,
+    "limit": 20
+  }
+}
+```
+
+**类型定义:**
+- `MixedTimelineItem`: `{ type: 'document' | 'note', ... }`
+
+---
+
 ## Admin API
 
 > 所有 Admin API 需要认证
@@ -270,3 +314,65 @@
   "posts_per_page": "30"
 }
 ```
+
+---
+
+## Quick Notes Admin API
+
+> 所有 Quick Notes API 需要认证
+
+### POST /api/admin/quick-notes
+创建快速笔记
+
+**请求体:**
+```json
+{
+  "content": "笔记内容 (最大500字)"
+}
+```
+
+**响应:**
+```json
+{
+  "success": true,
+  "data": {
+    "id": "note123",
+    "content": "笔记内容",
+    "is_archived": false,
+    "created_at": "2024-01-01T00:00:00.000Z",
+    "updated_at": "2024-01-01T00:00:00.000Z"
+  }
+}
+```
+
+---
+
+### GET /api/admin/quick-notes
+获取笔记列表（分页）
+
+**Query 参数:**
+| 参数   | 类型   | 必填 | 默认值 | 描述       |
+|--------|--------|------|--------|------------|
+| page   | number | 否   | 1      | 页码       |
+| limit  | number | 否   | 20     | 每页数量   |
+
+---
+
+### PUT /api/admin/quick-notes/:id
+更新笔记
+
+**请求体:**
+```json
+{
+  "content": "更新后的内容",
+  "is_archived": false
+}
+```
+
+---
+
+### DELETE /api/admin/quick-notes/:id
+删除笔记
+
+**类型定义:**
+- `QuickNote`: `{ id, content, is_archived, created_at, updated_at }`
