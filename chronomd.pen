@@ -1348,6 +1348,1022 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "IENmB",
+      "x": 2850,
+      "y": 0,
+      "name": "Timeline - Mobile",
+      "width": 390,
+      "fill": "$--bg-primary",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "7JoBo",
+          "name": "Mobile Header",
+          "width": "fill_container",
+          "height": 60,
+          "fill": "$--bg-surface",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "$--border-primary"
+          },
+          "padding": [
+            0,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "JnaQh",
+              "name": "mobileLogo",
+              "fill": "$--text-primary",
+              "content": "ChronoMD",
+              "fontFamily": "Newsreader",
+              "fontSize": 20,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "vE8CP",
+              "name": "mobileThemeBtn",
+              "width": 40,
+              "height": 40,
+              "cornerRadius": 8,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "Dm5v5",
+                  "name": "mobileThemeIcon",
+                  "width": 20,
+                  "height": 20,
+                  "iconFontName": "moon",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--text-secondary"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "ooWh3",
+          "name": "Content",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": 20,
+          "children": [
+            {
+              "type": "frame",
+              "id": "3A7zx",
+              "name": "mobileYearSection",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "ZDJ6l",
+                  "name": "mobileYearDot",
+                  "fill": "$--accent-primary",
+                  "width": 10,
+                  "height": 10
+                },
+                {
+                  "type": "text",
+                  "id": "vMuku",
+                  "name": "mobileYearText",
+                  "fill": "$--text-primary",
+                  "content": "2026",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 14,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "AzfoO",
+              "name": "Pills List",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "8t4ye",
+                  "name": "Document Pill",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "$--bg-surface",
+                  "cornerRadius": 22,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--border-primary"
+                  },
+                  "gap": 12,
+                  "padding": [
+                    0,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "mmzY9",
+                      "name": "mobilePill1Date",
+                      "fill": "$--text-tertiary",
+                      "content": "Feb 1",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "Fyxcc",
+                      "name": "mobilePill1Dot",
+                      "fill": "$--border-primary",
+                      "width": 4,
+                      "height": 4
+                    },
+                    {
+                      "type": "text",
+                      "id": "Os7LC",
+                      "name": "mobilePill1Title",
+                      "fill": "$--text-primary",
+                      "textGrowth": "fixed-width",
+                      "width": "fill_container",
+                      "content": "ai-memory-comparative-analysis",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "96Eue",
+                  "name": "Document Pill",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "$--bg-surface",
+                  "cornerRadius": 22,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--border-primary"
+                  },
+                  "gap": 12,
+                  "padding": [
+                    0,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "it2tT",
+                      "name": "mobilePill2Date",
+                      "fill": "$--text-tertiary",
+                      "content": "Feb 1",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "aXVkl",
+                      "name": "mobilePill2Dot",
+                      "fill": "$--border-primary",
+                      "width": 4,
+                      "height": 4
+                    },
+                    {
+                      "type": "text",
+                      "id": "mG060",
+                      "name": "mobilePill2Title",
+                      "fill": "$--text-primary",
+                      "content": "hello",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "3PX3i",
+          "name": "Footer",
+          "width": "fill_container",
+          "height": 60,
+          "padding": [
+            0,
+            20
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "5I901",
+              "name": "mobileFooterText",
+              "fill": "$--text-muted",
+              "content": "Powered by ChronoMD",
+              "fontFamily": "Inter",
+              "fontSize": 11,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "0cKmj",
+      "x": 3300,
+      "y": 0,
+      "name": "Document Detail - Mobile",
+      "width": 390,
+      "fill": "$--bg-primary",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "Dv6Cl",
+          "name": "Header",
+          "width": "fill_container",
+          "height": 60,
+          "fill": "$--bg-surface",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "$--border-primary"
+          },
+          "padding": [
+            0,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "j52D2",
+              "name": "detailMobileLogo",
+              "fill": "$--text-primary",
+              "content": "ChronoMD",
+              "fontFamily": "Newsreader",
+              "fontSize": 20,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "Xa198",
+              "name": "detailMobileNav",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "tn0Lm",
+                  "name": "detailMobileBack",
+                  "width": 20,
+                  "height": 20,
+                  "iconFontName": "arrow-left",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--text-secondary"
+                },
+                {
+                  "type": "icon_font",
+                  "id": "b5yzu",
+                  "name": "detailMobileTheme",
+                  "width": 20,
+                  "height": 20,
+                  "iconFontName": "moon",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--text-secondary"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "nIHTq",
+          "name": "Article Content",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": 20,
+          "children": [
+            {
+              "type": "text",
+              "id": "JKQg9",
+              "name": "detailMobileTitle",
+              "fill": "$--text-primary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "AI Memory Comparative Analysis",
+              "lineHeight": 1.2,
+              "fontFamily": "Newsreader",
+              "fontSize": 28,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "YPYDf",
+              "name": "detailMobileMeta",
+              "gap": 12,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "4FtJy",
+                  "name": "detailMobileDate",
+                  "fill": "$--text-tertiary",
+                  "content": "February 1, 2026",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "ellipse",
+                  "id": "4DLzU",
+                  "name": "detailMobileFolder",
+                  "fill": "$--border-primary",
+                  "width": 4,
+                  "height": 4
+                },
+                {
+                  "type": "text",
+                  "id": "aB6Kk",
+                  "name": "detailMobileFolderName",
+                  "fill": "$--accent-primary",
+                  "content": "Research",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "rectangle",
+              "id": "tDrlX",
+              "name": "detailMobileDivider",
+              "fill": "$--border-primary",
+              "width": "fill_container",
+              "height": 1
+            },
+            {
+              "type": "text",
+              "id": "3MUxX",
+              "name": "detailMobilePara1",
+              "fill": "$--text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "This article explores the comparative analysis of different AI memory architectures, examining their strengths and potential applications.",
+              "lineHeight": 1.7,
+              "fontFamily": "Inter",
+              "fontSize": 15,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "text",
+              "id": "0YgD7",
+              "name": "detailMobileH2",
+              "fill": "$--text-primary",
+              "content": "Introduction",
+              "fontFamily": "Newsreader",
+              "fontSize": 20,
+              "fontWeight": "600"
+            },
+            {
+              "type": "text",
+              "id": "w8AtM",
+              "name": "detailMobilePara2",
+              "fill": "$--text-secondary",
+              "textGrowth": "fixed-width",
+              "width": "fill_container",
+              "content": "Memory systems in artificial intelligence have evolved significantly over the past decade.",
+              "lineHeight": 1.7,
+              "fontFamily": "Inter",
+              "fontSize": 15,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "HMBLy",
+              "name": "Code Block",
+              "width": "fill_container",
+              "fill": "#1E293B",
+              "cornerRadius": 8,
+              "layout": "vertical",
+              "gap": 4,
+              "padding": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "Ru99B",
+                  "name": "detailMobileCodeLine1",
+                  "fill": "#E2E8F0",
+                  "content": "const memory = new AIMemory({",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "3GrHe",
+                  "name": "detailMobileCodeLine2",
+                  "fill": "#94A3B8",
+                  "content": "  type: 'episodic'",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "text",
+                  "id": "d8TZm",
+                  "name": "detailMobileCodeLine3",
+                  "fill": "#E2E8F0",
+                  "content": "});",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "ilmTD",
+          "name": "Footer",
+          "width": "fill_container",
+          "height": 60,
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "top": 1
+            },
+            "fill": "$--border-primary"
+          },
+          "padding": [
+            0,
+            20
+          ],
+          "justifyContent": "center",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "dJGGu",
+              "name": "detailMobileBackBtn",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "Cn1RJ",
+                  "name": "detailMobileBackIcon",
+                  "width": 16,
+                  "height": 16,
+                  "iconFontName": "arrow-left",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--text-secondary"
+                },
+                {
+                  "type": "text",
+                  "id": "1oHF3",
+                  "name": "detailMobileBackText",
+                  "fill": "$--text-secondary",
+                  "content": "Back to timeline",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "pAsI9",
+      "x": 3750,
+      "y": 0,
+      "name": "Admin Dashboard - Mobile",
+      "width": 390,
+      "fill": "$--bg-primary",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "G7BSe",
+          "name": "Header",
+          "width": "fill_container",
+          "height": 60,
+          "fill": "$--bg-surface",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "$--border-primary"
+          },
+          "padding": [
+            0,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "MBpNC",
+              "name": "adminMobileLogo",
+              "fill": "$--text-primary",
+              "content": "ChronoMD",
+              "fontFamily": "Newsreader",
+              "fontSize": 20,
+              "fontWeight": "600"
+            },
+            {
+              "type": "icon_font",
+              "id": "PVOeP",
+              "name": "adminMobileMenu",
+              "width": 24,
+              "height": 24,
+              "iconFontName": "menu",
+              "iconFontFamily": "lucide",
+              "fill": "$--text-secondary"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "HYy2F",
+          "name": "Content",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 20,
+          "padding": 20,
+          "children": [
+            {
+              "type": "text",
+              "id": "zgKod",
+              "name": "adminMobileTitle",
+              "fill": "$--text-primary",
+              "content": "Dashboard",
+              "fontFamily": "Newsreader",
+              "fontSize": 24,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "OlZc4",
+              "name": "Stats",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "uAfh3",
+                  "name": "adminMobileStat1",
+                  "width": "fill_container",
+                  "fill": "$--bg-surface",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--border-primary"
+                  },
+                  "padding": 16,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Kt0wt",
+                      "name": "adminMobileStat1Label",
+                      "fill": "$--text-tertiary",
+                      "content": "TOTAL DOCUMENTS",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 10,
+                      "fontWeight": "600",
+                      "letterSpacing": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "ncTFX",
+                      "name": "adminMobileStat1Value",
+                      "fill": "$--text-primary",
+                      "content": "2",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 28,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Su3Tc",
+                  "name": "adminMobileStat2",
+                  "width": "fill_container",
+                  "fill": "$--bg-surface",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--border-primary"
+                  },
+                  "padding": 16,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "F6GoY",
+                      "name": "adminMobileStat2Label",
+                      "fill": "$--text-tertiary",
+                      "content": "PUBLISHED",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 10,
+                      "fontWeight": "600",
+                      "letterSpacing": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "216ch",
+                      "name": "adminMobileStat2Value",
+                      "fill": "$--accent-primary",
+                      "content": "2",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 28,
+                      "fontWeight": "700"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "p7ySO",
+                  "name": "adminMobileStat3",
+                  "width": "fill_container",
+                  "fill": "$--bg-surface",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--border-primary"
+                  },
+                  "padding": 16,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Vcn1X",
+                      "name": "adminMobileStat3Label",
+                      "fill": "$--text-tertiary",
+                      "content": "DRAFTS",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 10,
+                      "fontWeight": "600",
+                      "letterSpacing": 1
+                    },
+                    {
+                      "type": "text",
+                      "id": "lUb4l",
+                      "name": "adminMobileStat3Value",
+                      "fill": "#E07B54",
+                      "content": "0",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 28,
+                      "fontWeight": "700"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "MbdFC",
+              "name": "Recent Documents",
+              "width": "fill_container",
+              "fill": "$--bg-surface",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$--border-primary"
+              },
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Yj7lF",
+                  "name": "adminMobileRecentHeader",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "bottom": 1
+                    },
+                    "fill": "$--border-divider"
+                  },
+                  "padding": 16,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Es8fq",
+                      "name": "adminMobileRecentTitle",
+                      "fill": "$--text-primary",
+                      "content": "Recent Documents",
+                      "fontFamily": "Newsreader",
+                      "fontSize": 16,
+                      "fontWeight": "500"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "kuQqu",
+                      "name": "adminMobileNewBtn",
+                      "height": 32,
+                      "fill": "$--accent-primary",
+                      "cornerRadius": 8,
+                      "gap": 6,
+                      "padding": [
+                        0,
+                        12
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "icon_font",
+                          "id": "0mqlq",
+                          "name": "adminMobileNewIcon",
+                          "width": 14,
+                          "height": 14,
+                          "iconFontName": "plus",
+                          "iconFontFamily": "lucide",
+                          "fill": "#FFFFFF"
+                        },
+                        {
+                          "type": "text",
+                          "id": "7KbPE",
+                          "name": "adminMobileNewText",
+                          "fill": "#FFFFFF",
+                          "content": "New",
+                          "fontFamily": "Inter",
+                          "fontSize": 12,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "yKmvj",
+                  "name": "adminMobileDoc1",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "bottom": 1
+                    },
+                    "fill": "$--border-divider"
+                  },
+                  "padding": 16,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "R1I9V",
+                      "name": "adminMobileDoc1Info",
+                      "width": "fill_container",
+                      "layout": "vertical",
+                      "gap": 4,
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "VcsZD",
+                          "name": "adminMobileDoc1Title",
+                          "fill": "$--text-primary",
+                          "textGrowth": "fixed-width",
+                          "width": "fill_container",
+                          "content": "ai-memory-comparative-analysis",
+                          "fontFamily": "Newsreader",
+                          "fontSize": 14,
+                          "fontWeight": "500"
+                        },
+                        {
+                          "type": "text",
+                          "id": "hlpKA",
+                          "name": "adminMobileDoc1Date",
+                          "fill": "$--text-tertiary",
+                          "content": "Feb 1, 2026",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 10,
+                          "fontWeight": "normal"
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "ArDYf",
+                      "name": "adminMobileDoc1Badge",
+                      "height": 22,
+                      "fill": "#DCFCE7",
+                      "cornerRadius": 4,
+                      "padding": [
+                        4,
+                        8
+                      ],
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "eNsCo",
+                          "name": "adminMobileDoc1BadgeText",
+                          "fill": "#16A34A",
+                          "content": "Published",
+                          "fontFamily": "Inter",
+                          "fontSize": 10,
+                          "fontWeight": "600"
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "Ww3BZ",
+          "name": "Tab Bar",
+          "width": "fill_container",
+          "height": 70,
+          "fill": "$--bg-surface",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "top": 1
+            },
+            "fill": "$--border-primary"
+          },
+          "padding": [
+            12,
+            0
+          ],
+          "justifyContent": "space_around",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "RDjP1",
+              "name": "adminMobileTab1",
+              "layout": "vertical",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "sDx7q",
+                  "name": "adminMobileTab1Icon",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "layout-grid",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--accent-primary"
+                },
+                {
+                  "type": "text",
+                  "id": "gAxw1",
+                  "name": "adminMobileTab1Label",
+                  "fill": "$--accent-primary",
+                  "content": "Dashboard",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "HADNL",
+              "name": "adminMobileTab2",
+              "layout": "vertical",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "LmVS9",
+                  "name": "adminMobileTab2Icon",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "file-text",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--text-muted"
+                },
+                {
+                  "type": "text",
+                  "id": "NweUQ",
+                  "name": "adminMobileTab2Label",
+                  "fill": "$--text-muted",
+                  "content": "Documents",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "vILQd",
+              "name": "adminMobileTab3",
+              "layout": "vertical",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "l0Al3",
+                  "name": "adminMobileTab3Icon",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "folder",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--text-muted"
+                },
+                {
+                  "type": "text",
+                  "id": "3txWV",
+                  "name": "adminMobileTab3Label",
+                  "fill": "$--text-muted",
+                  "content": "Folders",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "RAYbq",
+              "name": "adminMobileTab4",
+              "layout": "vertical",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "nT0Px",
+                  "name": "adminMobileTab4Icon",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "settings",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--text-muted"
+                },
+                {
+                  "type": "text",
+                  "id": "IF8WH",
+                  "name": "adminMobileTab4Label",
+                  "fill": "$--text-muted",
+                  "content": "Settings",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

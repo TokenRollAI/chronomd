@@ -81,29 +81,29 @@
 
 <div class="min-h-screen bg-[#FAFAFA] dark:bg-stone-950 transition-colors">
   <!-- Header -->
-  <header class="h-20 px-12 flex items-center justify-between border-b border-[#E5E5E5] dark:border-stone-800 bg-white dark:bg-stone-900">
-    <h1 class="text-2xl font-serif font-semibold text-[#1A1A1A] dark:text-stone-100">
+  <header class="h-16 md:h-20 px-5 md:px-12 flex items-center justify-between border-b border-[#E5E5E5] dark:border-stone-800 bg-white dark:bg-stone-900">
+    <h1 class="text-xl md:text-2xl font-serif font-semibold text-[#1A1A1A] dark:text-stone-100">
       {settings.site_title}
     </h1>
-    <div class="flex items-center gap-6">
+    <div class="flex items-center gap-4 md:gap-6">
       <a href="/" class="flex items-center gap-2 text-sm text-[#666666] dark:text-stone-400 hover:text-[#1A1A1A] dark:hover:text-stone-200 transition">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <svg class="w-4 h-4 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
         </svg>
-        Back
+        <span class="hidden md:inline">Back</span>
       </a>
       <ThemeToggle />
     </div>
   </header>
 
   <!-- Article -->
-  <article class="max-w-3xl mx-auto px-6 py-12">
+  <article class="max-w-3xl mx-auto px-5 md:px-6 py-6 md:py-12">
     <!-- Article Header -->
-    <header class="mb-10 pb-8 border-b border-[#E5E5E5] dark:border-stone-800">
-      <h1 class="text-4xl font-serif font-semibold text-[#1A1A1A] dark:text-stone-100 leading-tight mb-4">
+    <header class="mb-6 md:mb-10 pb-6 md:pb-8 border-b border-[#E5E5E5] dark:border-stone-800">
+      <h1 class="text-2xl md:text-4xl font-serif font-semibold text-[#1A1A1A] dark:text-stone-100 leading-tight mb-3 md:mb-4">
         {doc.title}
       </h1>
-      <div class="flex items-center gap-4 text-sm">
+      <div class="flex flex-wrap items-center gap-3 md:gap-4 text-sm">
         {#if doc.published_at}
           <time datetime={doc.published_at} class="font-mono text-xs text-[#888888] dark:text-stone-500">
             {new Date(doc.published_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
@@ -126,15 +126,15 @@
 
     {#if doc.is_locked && !unlockContent}
       <!-- Unlock Form -->
-      <div class="py-16 text-center">
-        <div class="w-16 h-16 rounded-full bg-[#F0F0F0] dark:bg-stone-800 flex items-center justify-center mx-auto mb-6">
-          <svg class="w-8 h-8 text-[#888888] dark:text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+      <div class="py-12 md:py-16 text-center">
+        <div class="w-14 md:w-16 h-14 md:h-16 rounded-full bg-[#F0F0F0] dark:bg-stone-800 flex items-center justify-center mx-auto mb-5 md:mb-6">
+          <svg class="w-7 md:w-8 h-7 md:h-8 text-[#888888] dark:text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
           </svg>
         </div>
-        <p class="text-[#666666] dark:text-stone-400 mb-6">Access code required to view content</p>
+        <p class="text-[#666666] dark:text-stone-400 mb-5 md:mb-6">Access code required to view content</p>
 
-        <form on:submit|preventDefault={handleUnlock} class="max-w-xs mx-auto">
+        <form on:submit|preventDefault={handleUnlock} class="max-w-xs mx-auto px-4 md:px-0">
           <input
             type="password"
             bind:value={accessCode}
@@ -156,15 +156,15 @@
       </div>
     {:else}
       <!-- Content -->
-      <div class="prose prose-stone dark:prose-invert prose-lg max-w-none
+      <div class="prose prose-stone dark:prose-invert prose-base md:prose-lg max-w-none
         prose-headings:font-serif prose-headings:font-semibold
-        prose-h2:text-2xl prose-h2:mt-10 prose-h2:mb-4
-        prose-h3:text-xl prose-h3:mt-8 prose-h3:mb-3
+        prose-h2:text-xl md:prose-h2:text-2xl prose-h2:mt-8 md:prose-h2:mt-10 prose-h2:mb-3 md:prose-h2:mb-4
+        prose-h3:text-lg md:prose-h3:text-xl prose-h3:mt-6 md:prose-h3:mt-8 prose-h3:mb-2 md:prose-h3:mb-3
         prose-p:leading-relaxed prose-p:text-[#666666] dark:prose-p:text-stone-400
         prose-a:text-[#0D6E6E] dark:prose-a:text-teal-400 prose-a:underline prose-a:underline-offset-2
         prose-strong:font-medium prose-strong:text-[#1A1A1A] dark:prose-strong:text-stone-200
-        prose-code:font-normal prose-code:before:content-none prose-code:after:content-none
-        prose-pre:bg-[#1E293B] prose-pre:rounded-lg prose-pre:p-5
+        prose-code:font-normal prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
+        prose-pre:bg-[#1E293B] prose-pre:rounded-lg prose-pre:p-4 md:prose-pre:p-5 prose-pre:overflow-x-auto
         prose-blockquote:font-normal prose-blockquote:border-l-[#0D6E6E] prose-blockquote:text-[#666666] dark:prose-blockquote:text-stone-400
         prose-img:rounded-xl
       ">
@@ -174,8 +174,8 @@
   </article>
 
   <!-- Footer -->
-  <footer class="py-8 border-t border-[#E5E5E5] dark:border-stone-800">
-    <div class="max-w-3xl mx-auto px-6 text-center">
+  <footer class="py-6 md:py-8 border-t border-[#E5E5E5] dark:border-stone-800">
+    <div class="max-w-3xl mx-auto px-5 md:px-6 text-center">
       <a href="/" class="inline-flex items-center gap-2 text-sm text-[#888888] dark:text-stone-500 hover:text-[#0D6E6E] dark:hover:text-teal-400 transition">
         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
           <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
