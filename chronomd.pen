@@ -2364,6 +2364,1023 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "yx9Sn",
+      "x": 4240,
+      "y": 0,
+      "name": "Quick Notes - Desktop",
+      "width": 1200,
+      "fill": "$--bg-primary",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "jIMqs",
+          "name": "Header",
+          "width": "fill_container",
+          "height": 80,
+          "fill": "$--bg-surface",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "$--border-primary"
+          },
+          "padding": [
+            0,
+            48
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "8dS6v",
+              "name": "title",
+              "fill": "$--text-primary",
+              "content": "ChronoMD",
+              "fontFamily": "Newsreader",
+              "fontSize": 24,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "rZObJ",
+              "name": "navRight",
+              "gap": 16,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "M3ZVm",
+                  "name": "notesBtn",
+                  "height": 36,
+                  "fill": "$--accent-primary",
+                  "cornerRadius": 18,
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    14
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "XOtyP",
+                      "name": "notesBtnIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "zap",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    },
+                    {
+                      "type": "text",
+                      "id": "xCO3n",
+                      "name": "notesBtnText",
+                      "fill": "#FFFFFF",
+                      "content": "Quick Notes",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "IlqjA",
+          "name": "Main Content",
+          "width": "fill_container",
+          "gap": 48,
+          "padding": 48,
+          "children": [
+            {
+              "type": "frame",
+              "id": "8xGpl",
+              "name": "Timeline Nav",
+              "width": 120,
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "Tozp7",
+                  "name": "yearDot",
+                  "gap": 12,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "ellipse",
+                      "id": "7VSlL",
+                      "name": "dot",
+                      "fill": "$--accent-primary",
+                      "width": 10,
+                      "height": 10
+                    },
+                    {
+                      "type": "text",
+                      "id": "oUcy2",
+                      "name": "yearText",
+                      "fill": "$--text-primary",
+                      "content": "2025",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "y26L9",
+                  "name": "line",
+                  "width": 2,
+                  "height": 280,
+                  "fill": "$--border-primary"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "XjbQR",
+              "name": "Notes List",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 12,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "so4Qf",
+                  "name": "Quick Note",
+                  "width": "fill_container",
+                  "fill": "$--bg-surface",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--border-primary"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "XGOf6",
+                      "name": "note1Meta",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "gW2mR",
+                          "name": "note1Time",
+                          "fill": "$--text-tertiary",
+                          "content": "Jan 15 · 3:42 PM",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "wyZog",
+                          "name": "note1Tag",
+                          "fill": "#E8F5F5",
+                          "cornerRadius": 10,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "Ovccr",
+                              "name": "note1TagText",
+                              "fill": "$--accent-primary",
+                              "content": "Quick Note",
+                              "fontFamily": "Inter",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "aZhxv",
+                      "name": "note1Content",
+                      "fill": "$--text-secondary",
+                      "content": "发现一个有趣的设计模式，可以用于后续的项目重构。先记下来回头研究。",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "VVZNK",
+                  "name": "Document Pill",
+                  "height": 40,
+                  "fill": "$--bg-surface",
+                  "cornerRadius": 20,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--border-primary"
+                  },
+                  "gap": 12,
+                  "padding": [
+                    0,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "ucGHu",
+                      "name": "docTime",
+                      "fill": "$--text-tertiary",
+                      "content": "Jan 14",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "ellipse",
+                      "id": "BNXhd",
+                      "name": "docDot",
+                      "fill": "$--border-primary",
+                      "width": 4,
+                      "height": 4
+                    },
+                    {
+                      "type": "text",
+                      "id": "3B75P",
+                      "name": "docTitle",
+                      "fill": "$--text-primary",
+                      "content": "2025 年技术规划",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "jrOrI",
+                  "name": "Quick Note 2",
+                  "width": "fill_container",
+                  "fill": "$--bg-surface",
+                  "cornerRadius": 12,
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": 1,
+                    "fill": "$--border-primary"
+                  },
+                  "layout": "vertical",
+                  "gap": 8,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "MfK6x",
+                      "name": "note2Meta",
+                      "gap": 8,
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "8hlNz",
+                          "name": "note2Time",
+                          "fill": "$--text-tertiary",
+                          "content": "Jan 13 · 9:15 AM",
+                          "fontFamily": "JetBrains Mono",
+                          "fontSize": 12,
+                          "fontWeight": "normal"
+                        },
+                        {
+                          "type": "frame",
+                          "id": "4srpZ",
+                          "name": "note2Tag",
+                          "fill": "#E8F5F5",
+                          "cornerRadius": 10,
+                          "padding": [
+                            2,
+                            8
+                          ],
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "2ihGp",
+                              "name": "note2TagText",
+                              "fill": "$--accent-primary",
+                              "content": "Quick Note",
+                              "fontFamily": "Inter",
+                              "fontSize": 11,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "text",
+                      "id": "uFCca",
+                      "name": "note2Content",
+                      "fill": "$--text-secondary",
+                      "content": "TODO: 周末整理一下读书笔记",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "u2yHR",
+          "name": "Floating Input Bar",
+          "width": "fill_container",
+          "fill": "$--bg-surface",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "top": 1
+            },
+            "fill": "$--border-primary"
+          },
+          "padding": [
+            16,
+            48
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "O3CKW",
+              "name": "inputWrapper",
+              "width": "fill_container",
+              "height": 48,
+              "fill": "$--bg-primary",
+              "cornerRadius": 24,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$--border-primary"
+              },
+              "gap": 12,
+              "padding": [
+                0,
+                16
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "LhI1R",
+                  "name": "zapIcon",
+                  "width": 18,
+                  "height": 18,
+                  "iconFontName": "zap",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--accent-primary"
+                },
+                {
+                  "type": "text",
+                  "id": "57pQw",
+                  "name": "placeholder",
+                  "fill": "$--text-muted",
+                  "content": "记录一个想法...",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "iYE78",
+                  "name": "sendBtn",
+                  "width": 36,
+                  "height": 36,
+                  "fill": "$--accent-primary",
+                  "cornerRadius": 18,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "XGLEC",
+                      "name": "sendIcon",
+                      "width": 18,
+                      "height": 18,
+                      "iconFontName": "arrow-up",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "Sf3sq",
+      "x": 5500,
+      "y": 0,
+      "name": "Quick Notes - Mobile",
+      "width": 390,
+      "fill": "$--bg-primary",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "VYWHE",
+          "name": "Header",
+          "width": "fill_container",
+          "height": 60,
+          "fill": "$--bg-surface",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "$--border-primary"
+          },
+          "padding": [
+            0,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "XOpDv",
+              "name": "mTitle",
+              "fill": "$--text-primary",
+              "content": "ChronoMD",
+              "fontFamily": "Newsreader",
+              "fontSize": 20,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "hWuJi",
+              "name": "mNotesBtn",
+              "height": 32,
+              "fill": "$--accent-primary",
+              "cornerRadius": 16,
+              "gap": 6,
+              "padding": [
+                0,
+                12
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "cZeq7",
+                  "name": "mNotesBtnIcon",
+                  "width": 14,
+                  "height": 14,
+                  "iconFontName": "zap",
+                  "iconFontFamily": "lucide",
+                  "fill": "#FFFFFF"
+                },
+                {
+                  "type": "text",
+                  "id": "xH2wC",
+                  "name": "mNotesBtnText",
+                  "fill": "#FFFFFF",
+                  "content": "Notes",
+                  "fontFamily": "Inter",
+                  "fontSize": 13,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "xIpYa",
+          "name": "Content",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 12,
+          "padding": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "1XK5l",
+              "name": "mYearLabel",
+              "gap": 8,
+              "padding": [
+                0,
+                0,
+                8,
+                0
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "ellipse",
+                  "id": "VAkeg",
+                  "name": "mYearDot",
+                  "fill": "$--accent-primary",
+                  "width": 8,
+                  "height": 8
+                },
+                {
+                  "type": "text",
+                  "id": "Ic1Sx",
+                  "name": "mYearText",
+                  "fill": "$--text-primary",
+                  "content": "2025",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 13,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "SebBO",
+              "name": "Mobile Note",
+              "width": "fill_container",
+              "fill": "$--bg-surface",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$--border-primary"
+              },
+              "layout": "vertical",
+              "gap": 6,
+              "padding": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "VkrC5",
+                  "name": "mNote1Meta",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "X30e7",
+                      "name": "mNote1Time",
+                      "fill": "$--text-tertiary",
+                      "content": "Jan 15 · 3:42 PM",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "IdYYC",
+                      "name": "mNote1Tag",
+                      "fill": "#E8F5F5",
+                      "cornerRadius": 8,
+                      "padding": [
+                        2,
+                        6
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "HwVr0",
+                          "name": "mNote1TagText",
+                          "fill": "$--accent-primary",
+                          "content": "Quick Note",
+                          "fontFamily": "Inter",
+                          "fontSize": 10,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "RCFJC",
+                  "name": "mNote1Content",
+                  "fill": "$--text-secondary",
+                  "content": "发现一个有趣的设计模式，可以用于后续的项目重构。",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "pxos8",
+              "name": "Mobile Doc Pill",
+              "width": "fill_container",
+              "height": 44,
+              "fill": "$--bg-surface",
+              "cornerRadius": 22,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$--border-primary"
+              },
+              "gap": 10,
+              "padding": [
+                0,
+                14
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "lgiEk",
+                  "name": "mDocTime",
+                  "fill": "$--text-tertiary",
+                  "content": "Jan 14",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 11,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "ellipse",
+                  "id": "XfLWZ",
+                  "name": "mDocDot",
+                  "fill": "$--border-primary",
+                  "width": 3,
+                  "height": 3
+                },
+                {
+                  "type": "text",
+                  "id": "J7FRj",
+                  "name": "mDocTitle",
+                  "fill": "$--text-primary",
+                  "content": "2025 年技术规划",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "7L18C",
+              "name": "Mobile Note 2",
+              "width": "fill_container",
+              "fill": "$--bg-surface",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$--border-primary"
+              },
+              "layout": "vertical",
+              "gap": 6,
+              "padding": 14,
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "OgZpl",
+                  "name": "mNote2Meta",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "Zx2Mb",
+                      "name": "mNote2Time",
+                      "fill": "$--text-tertiary",
+                      "content": "Jan 13 · 9:15 AM",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 11,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "mRMOE",
+                      "name": "mNote2Tag",
+                      "fill": "#E8F5F5",
+                      "cornerRadius": 8,
+                      "padding": [
+                        2,
+                        6
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "5Pa0i",
+                          "name": "mNote2TagText",
+                          "fill": "$--accent-primary",
+                          "content": "Quick Note",
+                          "fontFamily": "Inter",
+                          "fontSize": 10,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "text",
+                  "id": "tfIq6",
+                  "name": "mNote2Content",
+                  "fill": "$--text-secondary",
+                  "content": "TODO: 周末整理一下读书笔记",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "DlHmH",
+          "name": "Mobile Input Bar",
+          "width": "fill_container",
+          "fill": "$--bg-surface",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "top": 1
+            },
+            "fill": "$--border-primary"
+          },
+          "padding": [
+            12,
+            16
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "4YLhf",
+              "name": "mInputWrapper",
+              "width": "fill_container",
+              "height": 44,
+              "fill": "$--bg-primary",
+              "cornerRadius": 22,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$--border-primary"
+              },
+              "gap": 10,
+              "padding": [
+                0,
+                14
+              ],
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "lWIIb",
+                  "name": "mZapIcon",
+                  "width": 16,
+                  "height": 16,
+                  "iconFontName": "zap",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--accent-primary"
+                },
+                {
+                  "type": "text",
+                  "id": "5mGyO",
+                  "name": "mPlaceholder",
+                  "fill": "$--text-muted",
+                  "content": "记录一个想法...",
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "rla7u",
+                  "name": "mSendBtn",
+                  "width": 32,
+                  "height": 32,
+                  "fill": "$--accent-primary",
+                  "cornerRadius": 16,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "U5IIm",
+                      "name": "mSendIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "arrow-up",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "tR47C",
+      "x": 5950,
+      "y": 0,
+      "name": "Quick Note - Input Panel",
+      "width": 480,
+      "fill": "$--bg-surface",
+      "cornerRadius": 16,
+      "stroke": {
+        "align": "outside",
+        "thickness": 1,
+        "fill": "$--border-primary"
+      },
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "8vSeZ",
+          "name": "panelHeader",
+          "width": "fill_container",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "$--border-divider"
+          },
+          "padding": [
+            16,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "frame",
+              "id": "hmttw",
+              "name": "panelTitle",
+              "gap": 8,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "cbmFO",
+                  "name": "panelIcon",
+                  "width": 18,
+                  "height": 18,
+                  "iconFontName": "zap",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--accent-primary"
+                },
+                {
+                  "type": "text",
+                  "id": "istZN",
+                  "name": "panelTitleText",
+                  "fill": "$--text-primary",
+                  "content": "Quick Note",
+                  "fontFamily": "Inter",
+                  "fontSize": 16,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "N5sfx",
+              "name": "closeBtn",
+              "width": 28,
+              "height": 28,
+              "fill": "$--bg-muted",
+              "cornerRadius": 14,
+              "justifyContent": "center",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "3Tpzy",
+                  "name": "closeIcon",
+                  "width": 14,
+                  "height": 14,
+                  "iconFontName": "x",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--text-tertiary"
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "eF4EQ",
+          "name": "Panel Body",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": 20,
+          "children": [
+            {
+              "type": "frame",
+              "id": "4bXkq",
+              "name": "textarea",
+              "width": "fill_container",
+              "height": 120,
+              "fill": "$--bg-primary",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$--border-primary"
+              },
+              "layout": "vertical",
+              "padding": 16,
+              "children": [
+                {
+                  "type": "text",
+                  "id": "YKDmK",
+                  "name": "textContent",
+                  "fill": "$--text-primary",
+                  "content": "刚看完《设计心理学》第三章，关于映射的概念很有启发。好的设计应该让操作和结果之间的关系显而易见...",
+                  "lineHeight": 1.6,
+                  "fontFamily": "Inter",
+                  "fontSize": 14,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "DiFw1",
+              "name": "panelFooter",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "NK07a",
+                  "name": "charCount",
+                  "fill": "$--text-muted",
+                  "content": "86 / 500",
+                  "fontFamily": "JetBrains Mono",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                },
+                {
+                  "type": "frame",
+                  "id": "fnp5P",
+                  "name": "submitBtn",
+                  "height": 40,
+                  "fill": "$--accent-primary",
+                  "cornerRadius": 20,
+                  "gap": 8,
+                  "padding": [
+                    0,
+                    20
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "fXtxx",
+                      "name": "submitIcon",
+                      "width": 16,
+                      "height": 16,
+                      "iconFontName": "send",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    },
+                    {
+                      "type": "text",
+                      "id": "Ei708",
+                      "name": "submitText",
+                      "fill": "#FFFFFF",
+                      "content": "发布",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {
