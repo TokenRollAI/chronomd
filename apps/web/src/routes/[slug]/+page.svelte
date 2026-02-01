@@ -82,9 +82,9 @@
 <div class="min-h-screen bg-[#FAFAFA] dark:bg-stone-950 transition-colors">
   <!-- Header -->
   <header class="h-16 md:h-20 px-5 md:px-12 flex items-center justify-between border-b border-[#E5E5E5] dark:border-stone-800 bg-white dark:bg-stone-900">
-    <h1 class="text-xl md:text-2xl font-serif font-semibold text-[#1A1A1A] dark:text-stone-100">
+    <a href="/" class="text-xl md:text-2xl font-serif font-semibold text-[#1A1A1A] dark:text-stone-100 no-underline hover:opacity-80 transition">
       {settings.site_title}
-    </h1>
+    </a>
     <div class="flex items-center gap-4 md:gap-6">
       <a href="/" class="flex items-center gap-2 text-sm text-[#666666] dark:text-stone-400 hover:text-[#1A1A1A] dark:hover:text-stone-200 transition">
         <svg class="w-4 h-4 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">

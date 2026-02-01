@@ -43,9 +43,9 @@
 <div class="min-h-screen bg-[#FAFAFA] dark:bg-stone-950 transition-colors {isLoggedIn ? 'pb-20 md:pb-0' : ''}">
   <!-- Header -->
   <header class="h-16 md:h-20 px-5 md:px-12 flex items-center justify-between border-b border-[#E5E5E5] dark:border-stone-800 bg-white dark:bg-stone-900">
-    <h1 class="text-xl md:text-2xl font-serif font-semibold text-[#1A1A1A] dark:text-stone-100">
+    <a href="/" class="text-xl md:text-2xl font-serif font-semibold text-[#1A1A1A] dark:text-stone-100 no-underline hover:opacity-80 transition">
       {settings.site_title}
-    </h1>
+    </a>
     <div class="flex items-center gap-4">
       <ThemeToggle />
     </div>
