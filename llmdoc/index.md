@@ -56,6 +56,7 @@ chronomd/
 - [系统架构](./architecture/system-design.md) - 整体架构设计
 - [API 设计](./architecture/api-design.md) - API 端点和数据流
 - [数据库设计](./architecture/database-design.md) - D1 Schema 设计
+- [设计系统](./architecture/design-system.md) - 前端视觉设计规范 (字体、颜色、组件)
 
 ### 参考文档 (reference/)
 - [API 参考](./reference/api-reference.md) - 完整 API 文档

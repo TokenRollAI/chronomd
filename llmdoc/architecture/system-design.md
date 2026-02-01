@@ -35,6 +35,7 @@ ChronoMD 采用**前后端一体化**架构，所有代码都在一个 SvelteKit
 - **运行时**: Cloudflare Pages Functions (Workers 运行时)
 - **框架**: SvelteKit + adapter-cloudflare
 - **样式**: Tailwind CSS + @tailwindcss/typography (暗色模式: `class` 策略)
+- **设计系统**: 极简现代风格，详见 [设计系统](./design-system.md)
 - **数据库**: Cloudflare D1 (SQLite)
 - **存储**: Cloudflare R2
 - **认证**: JWT (jose 库)
