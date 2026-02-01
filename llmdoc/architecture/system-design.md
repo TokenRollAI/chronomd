@@ -142,6 +142,23 @@ ChronoMD 采用 Tailwind CSS `class` 策略实现暗色模式，核心组件如�
 - **3. 用户切换:** 用户点击 `ThemeToggle` 按钮 -> `theme.toggle()` -> `update()` 切换值 -> `apply()` 更新 DOM class 和 localStorage。
 - **4. 样式响应:** Tailwind `dark:` 变体和 `app.css` 中的 `.dark` 选择器自动生效。
 
+## PWA 架构
+
+ChronoMD 通过 `@vite-pwa/sveltekit` 插件集成 PWA 支持，实现离线访问和可安装能力。
+
+### 核心组件
+
+- `apps/web/vite.config.ts` (`SvelteKitPWA`): PWA 插件配置入口，定义 manifest、注册策略和 Workbox 缓存规则。
+- `apps/web/src/app.html` (PWA meta 标签): `theme-color`、`apple-touch-icon`、`apple-mobile-web-app-capable` 等标签。
+- `apps/web/static/icon-192x192.png`, `icon-512x512.png`, `apple-touch-icon.png`: PWA 图标资源。
+
+### 执行流
+
+- **1. 构建阶段:** Vite 构建时，`SvelteKitPWA` 插件生成 Service Worker (`sw.js`) 和 Web App Manifest (`manifest.webmanifest`)。
+- **2. 首次加载:** 浏览器加载页面后自动注册 Service Worker，预缓存所有静态资源。
+- **3. 离线访问:** Service Worker 拦截请求，静态资源从 precache 返回；Google Fonts 使用 CacheFirst；API 请求使用 NetworkFirst (10秒超时后回退缓存)。
+- **4. 自动更新:** `autoUpdate` 策略下，新版本 Service Worker 安装后自动激活，用户无需手动操作。
+
 ## 部署架构
 
 单一 Cloudflare Pages 项目：

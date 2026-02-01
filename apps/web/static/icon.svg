@@ -1,0 +1,15 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 512 512">
+  <rect width="512" height="512" rx="64" fill="#0D6E6E"/>
+  <g transform="translate(256, 256)">
+    <!-- Clock circle -->
+    <circle cx="0" cy="-20" r="120" fill="none" stroke="white" stroke-width="16"/>
+    <!-- Clock hour hand -->
+    <line x1="0" y1="-20" x2="0" y2="-80" stroke="white" stroke-width="14" stroke-linecap="round"/>
+    <!-- Clock minute hand -->
+    <line x1="0" y1="-20" x2="50" y2="-60" stroke="white" stroke-width="10" stroke-linecap="round"/>
+    <!-- Center dot -->
+    <circle cx="0" cy="-20" r="8" fill="white"/>
+    <!-- MD text -->
+    <text x="0" y="170" text-anchor="middle" font-family="Georgia, serif" font-size="80" font-weight="bold" fill="white">MD</text>
+  </g>
+</svg>

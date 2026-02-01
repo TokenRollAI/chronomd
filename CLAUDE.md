@@ -7,6 +7,7 @@ ChronoMD 是一个基于 Cloudflare 生态系统的极简个人 Markdown 发布�
 ## 技术栈
 
 - **前端**: SvelteKit + Tailwind CSS
+- **PWA**: @vite-pwa/sveltekit (Workbox Service Worker, 离线缓存)
 - **后端**: Cloudflare Workers
 - **数据库**: Cloudflare D1 (SQLite)
 - **存储**: Cloudflare R2
@@ -48,6 +49,14 @@ pnpm dev
 
 - **应用地址**: http://localhost:5173
 - **管理后台**: http://localhost:5173/admin/login
+
+## PWA 支持
+
+项目已支持 PWA（渐进式 Web 应用），可安装到手机/桌面主屏幕：
+- **Service Worker**: 自动生成 (Workbox)，支持离线缓存
+- **缓存策略**: 静态资源预缓存，API 请求 NetworkFirst
+- **图标**: `apps/web/static/` 目录下的 icon-192x192.png、icon-512x512.png
+- **配置**: `apps/web/vite.config.ts` 中的 SvelteKitPWA 插件
 
 ## 设计文件
 

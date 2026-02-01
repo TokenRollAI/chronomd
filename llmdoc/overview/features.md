@@ -87,6 +87,17 @@
 - **权限控制**: 仅登录用户可见输入入口，未登录用户仅可浏览
 - **暗色模式**: 完整支持 dark mode 变体
 
+#### 12. PWA 渐进式 Web 应用 (Progressive Web App)
+- **离线支持**: 通过 Service Worker (Workbox) 实现静态资源预缓存和运行时缓存
+- **可安装**: 提供 Web App Manifest，支持添加到主屏幕，standalone 模式运行
+- **自动更新**: `registerType: 'autoUpdate'`，Service Worker 自动检测更新并激活
+- **缓存策略**:
+  - 静态资源预缓存: `**/*.{js,css,html,svg,png,woff,woff2}`
+  - Google Fonts: CacheFirst (365天过期)
+  - API 请求: NetworkFirst (24小时过期，10秒超时回退)
+- **iOS 适配**: apple-touch-icon、apple-mobile-web-app-capable meta 标签
+- **主题色**: `#0D6E6E` 与设计系统主色调一致
+
 ### 计划功能 📋
 
 #### Phase 2

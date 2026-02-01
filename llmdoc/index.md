@@ -30,6 +30,7 @@ chronomd/
 │       │       └── [slug]/          # 文档详情页
 │       ├── migrations/              # 数据库迁移文件
 │       │   └── 0002_quick_notes.sql # Quick Notes 表迁移
+│       ├── static/                   # 静态资源 (PWA 图标等)
 │       └── wrangler.toml            # Cloudflare 配置
 ├── packages/
 │   └── cli/              # @chronomd/cli 命令行工具
