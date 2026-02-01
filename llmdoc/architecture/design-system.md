@@ -34,40 +34,88 @@
 | 次要文字 | #666666 | `text-[#666666]` |
 | 辅助文字 | #888888 | `text-[#888888]` |
 
-## 4. UI Patterns
+## 4. Responsive Design (Mobile-First)
+
+### 断点系统
+| 断点 | 宽度 | 用途 |
+|------|------|------|
+| 默认 | < 768px | 移动端 |
+| `md:` | >= 768px | 桌面端 |
+
+### 时间线页面 (`+page.svelte`)
+- **文档胶囊**: `w-full md:w-fit` - 移动端全宽，桌面端自适应
+- **年份标签**: 仅移动端显示的响应式年份分组标签
+- **按钮高度**: `h-11 md:h-9` - 移动端触摸优化 (44px)
+- 代码位置: `apps/web/src/routes/+page.svelte`
+
+### 文档详情页 (`[slug]/+page.svelte`)
+- **标题排版**: `text-2xl md:text-4xl` - 响应式字号
+- **水平间距**: `px-5 md:px-6` - 移动端紧凑边距
+- **垂直间距**: `py-6 md:py-12` - 移动端紧凑内边距
+- 代码位置: `apps/web/src/routes/[slug]/+page.svelte`
+
+### Admin 移动端导航 (`admin/+layout.svelte`)
+- **顶部导航栏**: 固定高度 `h-16`，含汉堡菜单按钮
+- **侧边滑出面板**: 汉堡菜单触发的移动端导航
+- **底部标签栏**: 固定定位 `h-16 z-40`，4 个导航项 (Dashboard, Documents, Folders, Settings)
+- **桌面端侧边栏**: `hidden md:flex` - 仅桌面端显示
+- 代码位置: `apps/web/src/routes/admin/+layout.svelte`
+
+### Admin 仪表盘 (`admin/+page.svelte`)
+- **统计卡片网格**: `grid-cols-1 md:grid-cols-3` - 移动端垂直堆叠
+- **新建按钮**: 响应式尺寸和文字
+- **文档列表**: 移动端优化的列表项间距
+- 代码位置: `apps/web/src/routes/admin/+page.svelte`
+
+## 5. UI Patterns
 
 ### 时间线胶囊 (Timeline Capsule)
 首页文档列表采用胶囊样式：
 - 圆角: `rounded-full`
-- 高度: `h-9`
+- 高度: `h-11 md:h-9` (触摸优化)
+- 宽度: `w-full md:w-fit` (移动端全宽)
 - 边框: 1px `border-[#E5E5E5]`
 - Hover: `hover:border-[#0D6E6E]`
-- 代码位置: `apps/web/src/routes/+page.svelte:81-97`
+- 代码位置: `apps/web/src/routes/+page.svelte`
 
 ### Admin 卡片 (Admin Card)
 Dashboard 统计卡片：
 - 圆角: `rounded-xl`
 - 边框: 1px `border-[#E5E5E5]`
+- 网格: `grid-cols-1 md:grid-cols-3`
 - 无阴影 (flat design)
-- 代码位置: `apps/web/src/routes/admin/+page.svelte:20-32`
+- 代码位置: `apps/web/src/routes/admin/+page.svelte`
+
+### 底部标签栏 (Bottom Tab Bar)
+移动端专用导航：
+- 高度: `h-16` (64px)
+- 位置: `fixed bottom-0 left-0 right-0 z-40`
+- 图标: Dashboard, Documents (FileText), Folders, Settings
+- 主色高亮: `text-[#0D6E6E]` (当前页)
+- 仅移动端: `md:hidden`
+- 代码位置: `apps/web/src/routes/admin/+layout.svelte`
 
 ### 文章排版 (Article Typography)
 详情页 prose 配置：
-- 标题: `font-serif font-semibold`
+- 标题: `font-serif font-semibold text-2xl md:text-4xl`
 - 正文: `text-[#666666]` + `leading-relaxed`
 - 链接: `text-[#0D6E6E] underline`
-- 代码位置: `apps/web/src/routes/[slug]/+page.svelte:159-170`
+- 代码位置: `apps/web/src/routes/[slug]/+page.svelte`
 
-## 5. Design Rationale
+## 6. Design Rationale
 
 - **1px 边框代替阴影**: 减少视觉噪音，保持页面轻盈
 - **统一浅色主题**: Admin 和前台使用相同的浅色基调，通过 dark mode 支持暗色
 - **衬线标题 + 无衬线正文**: 增加层次感，提升阅读体验
 - **胶囊式交互**: 清晰的点击区域，现代感强
+- **移动端优先 (Mobile-First)**: 默认样式针对移动端，通过 `md:` 断点增强桌面端体验
+- **触摸优化**: 移动端按钮高度 44px (h-11)，符合 iOS Human Interface Guidelines
+- **底部标签栏导航**: 移动端采用原生 App 式底部导航，提升可达性
 
-## 6. Design Source
+## 7. Design Source
 
 设计原稿: `chronomd.pen` (Pencil MCP 格式)
 - Page 1: Timeline - Public View
 - Page 2: Dashboard - Admin Panel
 - Page 3: Document Detail Page
+- Page 4: Mobile Responsive Views (时间线、详情页、Admin 导航)
