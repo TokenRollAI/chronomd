@@ -3381,6 +3381,1513 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "USFGW",
+      "x": 6530,
+      "y": 0,
+      "name": "Admin Quick Notes - Desktop",
+      "width": 1440,
+      "height": 900,
+      "fill": "$--bg-primary",
+      "children": [
+        {
+          "type": "frame",
+          "id": "jOeTE",
+          "name": "Sidebar",
+          "width": 260,
+          "height": "fill_container",
+          "fill": "$--bg-surface",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "right": 1
+            },
+            "fill": "$--border-primary"
+          },
+          "layout": "vertical",
+          "padding": [
+            24,
+            0
+          ],
+          "children": [
+            {
+              "type": "frame",
+              "id": "Jatla",
+              "name": "sidebarHeader",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                0,
+                24
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "hOXmV",
+                  "name": "sidebarLogo",
+                  "fill": "$--text-primary",
+                  "content": "ChronoMD",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 22,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "text",
+                  "id": "TsxbA",
+                  "name": "sidebarSubtitle",
+                  "fill": "$--text-tertiary",
+                  "content": "Admin Panel",
+                  "fontFamily": "Inter",
+                  "fontSize": 12,
+                  "fontWeight": "normal"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "63AaH",
+              "name": "Nav Items",
+              "width": "fill_container",
+              "layout": "vertical",
+              "gap": 4,
+              "padding": [
+                24,
+                12
+              ],
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "KMYO5",
+                  "name": "navDashboard",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "transparent",
+                  "cornerRadius": 8,
+                  "gap": 12,
+                  "padding": [
+                    0,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "dCL0k",
+                      "name": "navDashboardIcon",
+                      "width": 20,
+                      "height": 20,
+                      "iconFontName": "layout-grid",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--text-secondary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "nkv92",
+                      "name": "navDashboardText",
+                      "fill": "$--text-secondary",
+                      "content": "Dashboard",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "0lM17",
+                  "name": "navDocs",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "transparent",
+                  "cornerRadius": 8,
+                  "gap": 12,
+                  "padding": [
+                    0,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "bGoNX",
+                      "name": "navDocsIcon",
+                      "width": 20,
+                      "height": 20,
+                      "iconFontName": "file-text",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--text-secondary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "ilrEO",
+                      "name": "navDocsText",
+                      "fill": "$--text-secondary",
+                      "content": "Documents",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "8fNpk",
+                  "name": "navNotes",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "$--accent-primary",
+                  "cornerRadius": 8,
+                  "gap": 12,
+                  "padding": [
+                    0,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "SAaPs",
+                      "name": "navNotesIcon",
+                      "width": 20,
+                      "height": 20,
+                      "iconFontName": "message-square",
+                      "iconFontFamily": "lucide",
+                      "fill": "#FFFFFF"
+                    },
+                    {
+                      "type": "text",
+                      "id": "1MmYn",
+                      "name": "navNotesText",
+                      "fill": "#FFFFFF",
+                      "content": "Quick Notes",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "Q7Cjc",
+                  "name": "navFolders",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "transparent",
+                  "cornerRadius": 8,
+                  "gap": 12,
+                  "padding": [
+                    0,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "1FSDi",
+                      "name": "navFoldersIcon",
+                      "width": 20,
+                      "height": 20,
+                      "iconFontName": "folder",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--text-secondary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "kFbgE",
+                      "name": "navFoldersText",
+                      "fill": "$--text-secondary",
+                      "content": "Folders",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "ZDYjH",
+                  "name": "navSettings",
+                  "width": "fill_container",
+                  "height": 44,
+                  "fill": "transparent",
+                  "cornerRadius": 8,
+                  "gap": 12,
+                  "padding": [
+                    0,
+                    16
+                  ],
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "icon_font",
+                      "id": "xuqR6",
+                      "name": "navSettingsIcon",
+                      "width": 20,
+                      "height": 20,
+                      "iconFontName": "settings",
+                      "iconFontFamily": "lucide",
+                      "fill": "$--text-secondary"
+                    },
+                    {
+                      "type": "text",
+                      "id": "V7d1S",
+                      "name": "navSettingsText",
+                      "fill": "$--text-secondary",
+                      "content": "Settings",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "B1Cng",
+          "name": "Main Area",
+          "width": "fill_container",
+          "height": "fill_container",
+          "fill": "$--bg-primary",
+          "layout": "vertical",
+          "gap": 24,
+          "padding": 32,
+          "children": [
+            {
+              "type": "frame",
+              "id": "56FyE",
+              "name": "Page Header",
+              "width": "fill_container",
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "text",
+                  "id": "cgces",
+                  "name": "pageTitle",
+                  "fill": "$--text-primary",
+                  "content": "Quick Notes",
+                  "fontFamily": "Newsreader",
+                  "fontSize": 32,
+                  "fontWeight": "600"
+                },
+                {
+                  "type": "frame",
+                  "id": "QXST3",
+                  "name": "Header Actions",
+                  "gap": 12,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "i9gNP",
+                      "name": "Filter Tabs",
+                      "fill": "$--bg-surface",
+                      "cornerRadius": 8,
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": 1,
+                        "fill": "$--border-primary"
+                      },
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "lkzHs",
+                          "name": "Tab All",
+                          "height": 36,
+                          "fill": "$--accent-primary",
+                          "cornerRadius": 8,
+                          "padding": [
+                            0,
+                            16
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "5nYMu",
+                              "name": "tabAllText",
+                              "fill": "#FFFFFF",
+                              "content": "All",
+                              "fontFamily": "Inter",
+                              "fontSize": 13,
+                              "fontWeight": "600"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "CQmoL",
+                          "name": "Tab Active",
+                          "height": 36,
+                          "fill": "transparent",
+                          "padding": [
+                            0,
+                            16
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "14fVL",
+                              "name": "tabActiveText",
+                              "fill": "$--text-secondary",
+                              "content": "Active",
+                              "fontFamily": "Inter",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "nhpR7",
+                          "name": "Tab Archived",
+                          "height": 36,
+                          "fill": "transparent",
+                          "padding": [
+                            0,
+                            16
+                          ],
+                          "justifyContent": "center",
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "jKceV",
+                              "name": "tabArchivedText",
+                              "fill": "$--text-secondary",
+                              "content": "Archived",
+                              "fontFamily": "Inter",
+                              "fontSize": 13,
+                              "fontWeight": "500"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "g7C0p",
+              "name": "Notes Card",
+              "width": "fill_container",
+              "fill": "$--bg-surface",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$--border-primary"
+              },
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "spulA",
+                  "name": "Card Header",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "bottom": 1
+                    },
+                    "fill": "$--border-divider"
+                  },
+                  "padding": 20,
+                  "justifyContent": "space_between",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "7GUNQ",
+                      "name": "cardTitle",
+                      "fill": "$--text-secondary",
+                      "content": "3 notes",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "peFr2",
+                  "name": "Notes List",
+                  "width": "fill_container",
+                  "layout": "vertical",
+                  "children": [
+                    {
+                      "type": "frame",
+                      "id": "LsEQD",
+                      "name": "Note Item 1",
+                      "width": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": {
+                          "bottom": 1
+                        },
+                        "fill": "$--border-divider"
+                      },
+                      "padding": 20,
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "XkWJY",
+                          "name": "Note Content",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "V6BVl",
+                              "name": "note1Text",
+                              "fill": "$--text-primary",
+                              "content": "为 chronomd 引入了 pencil 做 UI 设计, 添加了 quicknote 的能力",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "jNwLQ",
+                              "name": "Note Meta",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "Ba2Kk",
+                                  "name": "note1Time",
+                                  "fill": "$--text-tertiary",
+                                  "content": "Feb 1, 2026 · 6:14 PM",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "10LJ5",
+                                  "name": "Badge Active",
+                                  "height": 22,
+                                  "fill": "#E8F5E9",
+                                  "cornerRadius": 11,
+                                  "padding": [
+                                    0,
+                                    8
+                                  ],
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "uK8gL",
+                                      "name": "note1BadgeText",
+                                      "fill": "#2E7D32",
+                                      "content": "Active",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "500"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "lpdFX",
+                          "name": "Note Actions",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "WO5fQ",
+                              "name": "Archive Btn",
+                              "width": 32,
+                              "height": 32,
+                              "fill": "transparent",
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "7yr9e",
+                                  "name": "note1ArchiveIcon",
+                                  "width": 18,
+                                  "height": 18,
+                                  "iconFontName": "archive",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$--text-muted"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "Dt6cB",
+                              "name": "Delete Btn",
+                              "width": 32,
+                              "height": 32,
+                              "fill": "transparent",
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "JAVsY",
+                                  "name": "note1DeleteIcon",
+                                  "width": 18,
+                                  "height": 18,
+                                  "iconFontName": "trash-2",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$--text-muted"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "v3hTS",
+                      "name": "Note Item 2",
+                      "width": "fill_container",
+                      "stroke": {
+                        "align": "inside",
+                        "thickness": {
+                          "bottom": 1
+                        },
+                        "fill": "$--border-divider"
+                      },
+                      "padding": 20,
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "mUIFA",
+                          "name": "Note Content",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "OEaGl",
+                              "name": "note2Text",
+                              "fill": "$--text-primary",
+                              "content": "这是一条测试笔记，用于展示 Quick Notes 的管理界面效果",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "k0DMy",
+                              "name": "Note Meta",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "JCtwe",
+                                  "name": "note2Time",
+                                  "fill": "$--text-tertiary",
+                                  "content": "Feb 1, 2026 · 2:30 PM",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "VmxxG",
+                                  "name": "Badge Active",
+                                  "height": 22,
+                                  "fill": "#E8F5E9",
+                                  "cornerRadius": 11,
+                                  "padding": [
+                                    0,
+                                    8
+                                  ],
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "XQZmo",
+                                      "name": "note2BadgeText",
+                                      "fill": "#2E7D32",
+                                      "content": "Active",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "500"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "j2LGH",
+                          "name": "Note Actions",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "qgTqL",
+                              "name": "Archive Btn",
+                              "width": 32,
+                              "height": 32,
+                              "fill": "transparent",
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "Jt20E",
+                                  "name": "note2ArchiveIcon",
+                                  "width": 18,
+                                  "height": 18,
+                                  "iconFontName": "archive",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$--text-muted"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "JXJ3a",
+                              "name": "Delete Btn",
+                              "width": 32,
+                              "height": 32,
+                              "fill": "transparent",
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "z9bDs",
+                                  "name": "note2DeleteIcon",
+                                  "width": 18,
+                                  "height": 18,
+                                  "iconFontName": "trash-2",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$--text-muted"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    },
+                    {
+                      "type": "frame",
+                      "id": "7dVis",
+                      "name": "Note Item 3 (Archived)",
+                      "width": "fill_container",
+                      "fill": "$--bg-muted",
+                      "padding": 20,
+                      "justifyContent": "space_between",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "MzfNx",
+                          "name": "Note Content",
+                          "width": "fill_container",
+                          "layout": "vertical",
+                          "gap": 8,
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "V7ETI",
+                              "name": "note3Text",
+                              "fill": "$--text-tertiary",
+                              "content": "已归档的旧笔记内容，这条笔记已经被归档了",
+                              "fontFamily": "Inter",
+                              "fontSize": 14,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "yi6cR",
+                              "name": "Note Meta",
+                              "gap": 12,
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "yJ8vE",
+                                  "name": "note3Time",
+                                  "fill": "$--text-muted",
+                                  "content": "Jan 28, 2026 · 10:00 AM",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 12,
+                                  "fontWeight": "normal"
+                                },
+                                {
+                                  "type": "frame",
+                                  "id": "abOVf",
+                                  "name": "Badge Archived",
+                                  "height": 22,
+                                  "fill": "#F5F5F5",
+                                  "cornerRadius": 11,
+                                  "padding": [
+                                    0,
+                                    8
+                                  ],
+                                  "justifyContent": "center",
+                                  "alignItems": "center",
+                                  "children": [
+                                    {
+                                      "type": "text",
+                                      "id": "OSPWu",
+                                      "name": "note3BadgeText",
+                                      "fill": "#9E9E9E",
+                                      "content": "Archived",
+                                      "fontFamily": "Inter",
+                                      "fontSize": 11,
+                                      "fontWeight": "500"
+                                    }
+                                  ]
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "SNpKQ",
+                          "name": "Note Actions",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "frame",
+                              "id": "TaZ1j",
+                              "name": "Restore Btn",
+                              "width": 32,
+                              "height": 32,
+                              "fill": "transparent",
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "fuhEs",
+                                  "name": "note3RestoreIcon",
+                                  "width": 18,
+                                  "height": 18,
+                                  "iconFontName": "archive-restore",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$--text-muted"
+                                }
+                              ]
+                            },
+                            {
+                              "type": "frame",
+                              "id": "GF4Pm",
+                              "name": "Delete Btn",
+                              "width": 32,
+                              "height": 32,
+                              "fill": "transparent",
+                              "cornerRadius": 6,
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "icon_font",
+                                  "id": "PekL9",
+                                  "name": "note3DeleteIcon",
+                                  "width": 18,
+                                  "height": 18,
+                                  "iconFontName": "trash-2",
+                                  "iconFontFamily": "lucide",
+                                  "fill": "$--text-muted"
+                                }
+                              ]
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "uIVbl",
+      "x": 8142,
+      "y": 28,
+      "name": "Admin Quick Notes - Mobile",
+      "width": 432,
+      "height": 872,
+      "fill": "$--bg-primary",
+      "layout": "vertical",
+      "children": [
+        {
+          "type": "frame",
+          "id": "9eyLA",
+          "name": "Header",
+          "width": "fill_container",
+          "height": 60,
+          "fill": "$--bg-surface",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "bottom": 1
+            },
+            "fill": "$--border-primary"
+          },
+          "padding": [
+            0,
+            20
+          ],
+          "justifyContent": "space_between",
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "brB0T",
+              "name": "mobileLogo",
+              "fill": "$--text-primary",
+              "content": "ChronoMD",
+              "fontFamily": "Newsreader",
+              "fontSize": 20,
+              "fontWeight": "600"
+            },
+            {
+              "type": "icon_font",
+              "id": "c2DhF",
+              "name": "mobileMenuIcon",
+              "width": 24,
+              "height": 24,
+              "iconFontName": "menu",
+              "iconFontFamily": "lucide",
+              "fill": "$--text-secondary"
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "tY2x2",
+          "name": "Content",
+          "width": "fill_container",
+          "layout": "vertical",
+          "gap": 16,
+          "padding": 20,
+          "children": [
+            {
+              "type": "text",
+              "id": "C7hvj",
+              "name": "mobileTitle",
+              "fill": "$--text-primary",
+              "content": "Quick Notes",
+              "fontFamily": "Newsreader",
+              "fontSize": 24,
+              "fontWeight": "600"
+            },
+            {
+              "type": "frame",
+              "id": "4REek",
+              "name": "Filter Tabs",
+              "width": "fill_container",
+              "fill": "$--bg-surface",
+              "cornerRadius": 8,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$--border-primary"
+              },
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "QLd0O",
+                  "name": "Tab All",
+                  "width": "fill_container",
+                  "height": 40,
+                  "fill": "$--accent-primary",
+                  "cornerRadius": 8,
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "nxHpB",
+                      "name": "mobileTabAllText",
+                      "fill": "#FFFFFF",
+                      "content": "All",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "600"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "NYR47",
+                  "name": "Tab Active",
+                  "width": "fill_container",
+                  "height": 40,
+                  "fill": "transparent",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "iPC93",
+                      "name": "mobileTabActiveText",
+                      "fill": "$--text-secondary",
+                      "content": "Active",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "HmsMk",
+                  "name": "Tab Archived",
+                  "width": "fill_container",
+                  "height": 40,
+                  "fill": "transparent",
+                  "justifyContent": "center",
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "m7oI9",
+                      "name": "mobileTabArchivedText",
+                      "fill": "$--text-secondary",
+                      "content": "Archived",
+                      "fontFamily": "Inter",
+                      "fontSize": 13,
+                      "fontWeight": "500"
+                    }
+                  ]
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "POL8y",
+              "name": "Notes Card",
+              "width": "fill_container",
+              "fill": "$--bg-surface",
+              "cornerRadius": 12,
+              "stroke": {
+                "align": "inside",
+                "thickness": 1,
+                "fill": "$--border-primary"
+              },
+              "layout": "vertical",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "etFSx",
+                  "name": "Note Item 1",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "bottom": 1
+                    },
+                    "fill": "$--border-divider"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "NKdk3",
+                      "name": "mNote1Text",
+                      "fill": "$--text-primary",
+                      "content": "为 chronomd 引入了 pencil 做 UI 设计, 添加了 quicknote 的能力",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "4jUrx",
+                      "name": "Note Bottom",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "MZBmd",
+                          "name": "Note Meta",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "J70Il",
+                              "name": "mNote1Time",
+                              "fill": "$--text-tertiary",
+                              "content": "Feb 1 · 6:14 PM",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "03lym",
+                              "name": "Badge",
+                              "height": 20,
+                              "fill": "#E8F5E9",
+                              "cornerRadius": 10,
+                              "padding": [
+                                0,
+                                6
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "lU10w",
+                                  "name": "mNote1BadgeText",
+                                  "fill": "#2E7D32",
+                                  "content": "Active",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 10,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "veket",
+                          "name": "Actions",
+                          "gap": 4,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "QARMY",
+                              "name": "mNote1Archive",
+                              "width": 18,
+                              "height": 18,
+                              "iconFontName": "archive",
+                              "iconFontFamily": "lucide",
+                              "fill": "$--text-muted"
+                            },
+                            {
+                              "type": "icon_font",
+                              "id": "inxf2",
+                              "name": "mNote1Delete",
+                              "width": 18,
+                              "height": 18,
+                              "iconFontName": "trash-2",
+                              "iconFontFamily": "lucide",
+                              "fill": "$--text-muted"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "WuUZP",
+                  "name": "Note Item 2",
+                  "width": "fill_container",
+                  "stroke": {
+                    "align": "inside",
+                    "thickness": {
+                      "bottom": 1
+                    },
+                    "fill": "$--border-divider"
+                  },
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "cfVVC",
+                      "name": "mNote2Text",
+                      "fill": "$--text-primary",
+                      "content": "这是一条测试笔记，用于展示管理界面效果",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "fs76w",
+                      "name": "Note Bottom",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "pM0zf",
+                          "name": "Note Meta",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "xrFw1",
+                              "name": "mNote2Time",
+                              "fill": "$--text-tertiary",
+                              "content": "Feb 1 · 2:30 PM",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "xBo7I",
+                              "name": "Badge",
+                              "height": 20,
+                              "fill": "#E8F5E9",
+                              "cornerRadius": 10,
+                              "padding": [
+                                0,
+                                6
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "1IjHb",
+                                  "name": "mNote2BadgeText",
+                                  "fill": "#2E7D32",
+                                  "content": "Active",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 10,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "GakB9",
+                          "name": "Actions",
+                          "gap": 4,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "A1Pbg",
+                              "name": "mNote2Archive",
+                              "width": 18,
+                              "height": 18,
+                              "iconFontName": "archive",
+                              "iconFontFamily": "lucide",
+                              "fill": "$--text-muted"
+                            },
+                            {
+                              "type": "icon_font",
+                              "id": "awb6s",
+                              "name": "mNote2Delete",
+                              "width": 18,
+                              "height": 18,
+                              "iconFontName": "trash-2",
+                              "iconFontFamily": "lucide",
+                              "fill": "$--text-muted"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "frame",
+                  "id": "jQprD",
+                  "name": "Note Item 3 (Archived)",
+                  "width": "fill_container",
+                  "fill": "$--bg-muted",
+                  "layout": "vertical",
+                  "gap": 12,
+                  "padding": 16,
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "x9xjb",
+                      "name": "mNote3Text",
+                      "fill": "$--text-tertiary",
+                      "content": "已归档的旧笔记内容",
+                      "fontFamily": "Inter",
+                      "fontSize": 14,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "XzuXN",
+                      "name": "Note Bottom",
+                      "width": "fill_container",
+                      "justifyContent": "space_between",
+                      "alignItems": "center",
+                      "children": [
+                        {
+                          "type": "frame",
+                          "id": "ymGp6",
+                          "name": "Note Meta",
+                          "gap": 8,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "text",
+                              "id": "FJHeV",
+                              "name": "mNote3Time",
+                              "fill": "$--text-muted",
+                              "content": "Jan 28 · 10:00 AM",
+                              "fontFamily": "Inter",
+                              "fontSize": 12,
+                              "fontWeight": "normal"
+                            },
+                            {
+                              "type": "frame",
+                              "id": "cP8yj",
+                              "name": "Badge",
+                              "height": 20,
+                              "fill": "#F5F5F5",
+                              "cornerRadius": 10,
+                              "padding": [
+                                0,
+                                6
+                              ],
+                              "justifyContent": "center",
+                              "alignItems": "center",
+                              "children": [
+                                {
+                                  "type": "text",
+                                  "id": "vDxt1",
+                                  "name": "mNote3BadgeText",
+                                  "fill": "#9E9E9E",
+                                  "content": "Archived",
+                                  "fontFamily": "Inter",
+                                  "fontSize": 10,
+                                  "fontWeight": "500"
+                                }
+                              ]
+                            }
+                          ]
+                        },
+                        {
+                          "type": "frame",
+                          "id": "uOEPN",
+                          "name": "Actions",
+                          "gap": 4,
+                          "alignItems": "center",
+                          "children": [
+                            {
+                              "type": "icon_font",
+                              "id": "1whi1",
+                              "name": "mNote3Restore",
+                              "width": 18,
+                              "height": 18,
+                              "iconFontName": "archive-restore",
+                              "iconFontFamily": "lucide",
+                              "fill": "$--text-muted"
+                            },
+                            {
+                              "type": "icon_font",
+                              "id": "f7FKx",
+                              "name": "mNote3Delete",
+                              "width": 18,
+                              "height": 18,
+                              "iconFontName": "trash-2",
+                              "iconFontFamily": "lucide",
+                              "fill": "$--text-muted"
+                            }
+                          ]
+                        }
+                      ]
+                    }
+                  ]
+                }
+              ]
+            }
+          ]
+        },
+        {
+          "type": "frame",
+          "id": "JrI67",
+          "name": "Tab Bar",
+          "width": "fill_container",
+          "height": 70,
+          "fill": "$--bg-surface",
+          "stroke": {
+            "align": "inside",
+            "thickness": {
+              "top": 1
+            },
+            "fill": "$--border-primary"
+          },
+          "padding": [
+            12,
+            0
+          ],
+          "justifyContent": "space_around",
+          "alignItems": "end",
+          "children": [
+            {
+              "type": "frame",
+              "id": "Ev9wM",
+              "name": "Tab Dashboard",
+              "layout": "vertical",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "Bl32U",
+                  "name": "tab1Icon",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "layout-grid",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--text-muted"
+                },
+                {
+                  "type": "text",
+                  "id": "ClxmE",
+                  "name": "tab1Label",
+                  "fill": "$--text-muted",
+                  "content": "Dashboard",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "Kw06J",
+              "name": "Tab Docs",
+              "layout": "vertical",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "6onUW",
+                  "name": "tab2Icon",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "file-text",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--text-muted"
+                },
+                {
+                  "type": "text",
+                  "id": "xFLxB",
+                  "name": "tab2Label",
+                  "fill": "$--text-muted",
+                  "content": "Documents",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "7Kt5B",
+              "name": "Tab Notes",
+              "layout": "vertical",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "3ypvu",
+                  "name": "tab3Icon",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "message-square",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--accent-primary"
+                },
+                {
+                  "type": "text",
+                  "id": "Fe2iZ",
+                  "name": "tab3Label",
+                  "fill": "$--accent-primary",
+                  "content": "Notes",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "600"
+                }
+              ]
+            },
+            {
+              "type": "frame",
+              "id": "4gDry",
+              "name": "Tab Settings",
+              "layout": "vertical",
+              "gap": 4,
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "icon_font",
+                  "id": "G7zBQ",
+                  "name": "tab4Icon",
+                  "width": 22,
+                  "height": 22,
+                  "iconFontName": "settings",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--text-muted"
+                },
+                {
+                  "type": "text",
+                  "id": "8ehNc",
+                  "name": "tab4Label",
+                  "fill": "$--text-muted",
+                  "content": "Settings",
+                  "fontFamily": "Inter",
+                  "fontSize": 10,
+                  "fontWeight": "500"
+                }
+              ]
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {
