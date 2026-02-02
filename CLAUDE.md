@@ -68,3 +68,7 @@ pnpm dev
 ## 文档系统
 
 项目使用 llmdoc 文档系统，详见 `llmdoc/index.md`。
+
+---
+
+先确认方案, 再设计 UI, 再开始编码.

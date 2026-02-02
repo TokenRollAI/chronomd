@@ -4888,6 +4888,428 @@
           ]
         }
       ]
+    },
+    {
+      "type": "frame",
+      "id": "LE7hb",
+      "x": 8624,
+      "y": 0,
+      "name": "QuickNote Capsule Design",
+      "width": 500,
+      "height": 500,
+      "fill": "$--bg-primary",
+      "layout": "vertical",
+      "gap": 32,
+      "padding": 32,
+      "children": [
+        {
+          "type": "text",
+          "id": "Vurrc",
+          "name": "titleText",
+          "fill": "$--text-primary",
+          "content": "QuickNote 胶囊式设计",
+          "fontFamily": "Inter",
+          "fontSize": 16,
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "gCgWZ",
+          "name": "collapsedLabel",
+          "fill": "$--text-muted",
+          "content": "收缩状态 (默认)",
+          "fontFamily": "Inter",
+          "fontSize": 12,
+          "fontWeight": "500"
+        },
+        {
+          "type": "frame",
+          "id": "cDX5U",
+          "name": "QuickNote Capsule - Collapsed",
+          "width": "fill_container",
+          "height": 44,
+          "fill": "$--bg-surface",
+          "cornerRadius": 22,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "$--border-primary"
+          },
+          "gap": 10,
+          "padding": [
+            0,
+            16
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "0Oirf",
+              "name": "date",
+              "fill": "$--text-tertiary",
+              "content": "Jan 15",
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "HRY7I",
+              "name": "tag",
+              "fill": "#E8F5F5",
+              "cornerRadius": 10,
+              "padding": [
+                2,
+                8
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "I1UY6",
+                  "name": "pillTagText",
+                  "fill": "$--accent-primary",
+                  "content": "Quick Note",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "puVOB",
+              "name": "preview",
+              "fill": "$--text-secondary",
+              "content": "发现一个有趣的设计模式...",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "icon_font",
+              "id": "1XQoh",
+              "name": "chevron",
+              "width": 16,
+              "height": 16,
+              "iconFontName": "chevron-down",
+              "iconFontFamily": "lucide",
+              "fill": "$--text-muted"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "mh0RL",
+          "name": "expandedLabel",
+          "fill": "$--text-muted",
+          "content": "展开状态 (点击后)",
+          "fontFamily": "Inter",
+          "fontSize": 12,
+          "fontWeight": "500"
+        },
+        {
+          "type": "frame",
+          "id": "rSbcn",
+          "name": "QuickNote Capsule - Expanded",
+          "width": "fill_container",
+          "fill": "$--bg-surface",
+          "cornerRadius": 16,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "$--accent-primary"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "oZbDu",
+              "name": "meta",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "8MBf5",
+                  "name": "expandedLeft",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "eBI8T",
+                      "name": "expandedDate",
+                      "fill": "$--text-tertiary",
+                      "content": "Jan 15 · 3:42 PM",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "5vwPh",
+                      "name": "expandedTag",
+                      "fill": "#E8F5F5",
+                      "cornerRadius": 10,
+                      "padding": [
+                        2,
+                        8
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "xeodr",
+                          "name": "expandedTagText",
+                          "fill": "$--accent-primary",
+                          "content": "Quick Note",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "icon_font",
+                  "id": "gNAM7",
+                  "name": "chevronUp",
+                  "width": 16,
+                  "height": 16,
+                  "iconFontName": "chevron-up",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--text-muted"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "VImeP",
+              "name": "content",
+              "fill": "$--text-secondary",
+              "content": "发现一个有趣的设计模式，可以用于后续的项目重构。先记下来回头研究。",
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
+    },
+    {
+      "type": "frame",
+      "id": "PE8aA",
+      "x": 9174,
+      "y": 0,
+      "name": "QuickNote Capsule - Mobile",
+      "width": 390,
+      "height": 500,
+      "fill": "$--bg-primary",
+      "layout": "vertical",
+      "gap": 24,
+      "padding": 20,
+      "children": [
+        {
+          "type": "text",
+          "id": "xIyMd",
+          "name": "mobileTitle",
+          "fill": "$--text-primary",
+          "content": "移动端设计",
+          "fontFamily": "Inter",
+          "fontSize": 16,
+          "fontWeight": "600"
+        },
+        {
+          "type": "text",
+          "id": "cyvec",
+          "name": "mobileCollapsedLabel",
+          "fill": "$--text-muted",
+          "content": "收缩状态",
+          "fontFamily": "Inter",
+          "fontSize": 12,
+          "fontWeight": "500"
+        },
+        {
+          "type": "frame",
+          "id": "5L7Uu",
+          "name": "Mobile Collapsed",
+          "width": "fill_container",
+          "height": 44,
+          "fill": "$--bg-surface",
+          "cornerRadius": 22,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "$--border-primary"
+          },
+          "gap": 8,
+          "padding": [
+            0,
+            16
+          ],
+          "alignItems": "center",
+          "children": [
+            {
+              "type": "text",
+              "id": "yG7YK",
+              "name": "mPillDate",
+              "fill": "$--text-tertiary",
+              "content": "Jan 15",
+              "fontFamily": "JetBrains Mono",
+              "fontSize": 12,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "frame",
+              "id": "y6LEc",
+              "name": "mPillTag",
+              "fill": "#E8F5F5",
+              "cornerRadius": 10,
+              "padding": [
+                2,
+                8
+              ],
+              "children": [
+                {
+                  "type": "text",
+                  "id": "ggcWn",
+                  "name": "mPillTagText",
+                  "fill": "$--accent-primary",
+                  "content": "Quick Note",
+                  "fontFamily": "Inter",
+                  "fontSize": 11,
+                  "fontWeight": "500"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "Oq9hc",
+              "name": "mPillPreview",
+              "fill": "$--text-secondary",
+              "content": "发现一个有趣的设计模式...",
+              "fontFamily": "Inter",
+              "fontSize": 13,
+              "fontWeight": "normal"
+            },
+            {
+              "type": "icon_font",
+              "id": "fZItX",
+              "name": "mPillChevron",
+              "width": 16,
+              "height": 16,
+              "iconFontName": "chevron-down",
+              "iconFontFamily": "lucide",
+              "fill": "$--text-muted"
+            }
+          ]
+        },
+        {
+          "type": "text",
+          "id": "u67OC",
+          "name": "mobileExpandedLabel",
+          "fill": "$--text-muted",
+          "content": "展开状态",
+          "fontFamily": "Inter",
+          "fontSize": 12,
+          "fontWeight": "500"
+        },
+        {
+          "type": "frame",
+          "id": "lWBsP",
+          "name": "Mobile Expanded",
+          "width": "fill_container",
+          "fill": "$--bg-surface",
+          "cornerRadius": 16,
+          "stroke": {
+            "align": "inside",
+            "thickness": 1,
+            "fill": "$--accent-primary"
+          },
+          "layout": "vertical",
+          "gap": 10,
+          "padding": 16,
+          "children": [
+            {
+              "type": "frame",
+              "id": "zjZKj",
+              "name": "mExpandedMeta",
+              "width": "fill_container",
+              "gap": 8,
+              "justifyContent": "space_between",
+              "alignItems": "center",
+              "children": [
+                {
+                  "type": "frame",
+                  "id": "eTcdW",
+                  "name": "mExpandedLeft",
+                  "gap": 8,
+                  "alignItems": "center",
+                  "children": [
+                    {
+                      "type": "text",
+                      "id": "1eFtf",
+                      "name": "mExpandedDate",
+                      "fill": "$--text-tertiary",
+                      "content": "Jan 15 · 3:42 PM",
+                      "fontFamily": "JetBrains Mono",
+                      "fontSize": 12,
+                      "fontWeight": "normal"
+                    },
+                    {
+                      "type": "frame",
+                      "id": "RmdfW",
+                      "name": "mExpandedTag",
+                      "fill": "#E8F5F5",
+                      "cornerRadius": 10,
+                      "padding": [
+                        2,
+                        8
+                      ],
+                      "children": [
+                        {
+                          "type": "text",
+                          "id": "6vT9V",
+                          "name": "mExpandedTagText",
+                          "fill": "$--accent-primary",
+                          "content": "Quick Note",
+                          "fontFamily": "Inter",
+                          "fontSize": 11,
+                          "fontWeight": "500"
+                        }
+                      ]
+                    }
+                  ]
+                },
+                {
+                  "type": "icon_font",
+                  "id": "LN30c",
+                  "name": "mExpandedChevron",
+                  "width": 16,
+                  "height": 16,
+                  "iconFontName": "chevron-up",
+                  "iconFontFamily": "lucide",
+                  "fill": "$--text-muted"
+                }
+              ]
+            },
+            {
+              "type": "text",
+              "id": "weYn9",
+              "name": "mExpandedContent",
+              "fill": "$--text-secondary",
+              "content": "发现一个有趣的设计模式，可以用于后续的项目重构。先记下来回头研究。",
+              "fontFamily": "Inter",
+              "fontSize": 14,
+              "fontWeight": "normal"
+            }
+          ]
+        }
+      ]
     }
   ],
   "variables": {

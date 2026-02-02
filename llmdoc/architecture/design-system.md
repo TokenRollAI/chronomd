@@ -99,6 +99,28 @@ Dashboard 统计卡片：
 时间线页和文档详情页的 header 中，站点标题 (`<h1>`) 使用 `<a href="/">` 包裹，点击可返回首页。
 - 适用页面: `apps/web/src/routes/+page.svelte`, `apps/web/src/routes/[slug]/+page.svelte`
 
+### QuickNote 胶囊 (QuickNote Capsule)
+Quick Notes 采用可展开的胶囊式设计，区别于文档胶囊：
+
+**收缩状态 (默认)**:
+- 形状: `rounded-full` (胶囊)
+- 高度: `h-11 md:h-10` (触摸优化)
+- 宽度: `w-full md:w-fit` (移动端全宽)
+- 边框: `border-[#E5E5E5]`，Hover 时 `border-[#0D6E6E]`
+- 内容: 日期 + "Quick Note" 标签 + 内容预览 (20字) + 下箭头
+
+**展开状态 (点击后)**:
+- 形状: `rounded-2xl` (卡片)
+- 边框: `border-[#0D6E6E]` (青色高亮)
+- 内边距: `p-4`
+- 内容: 完整日期时间 + 标签 + 上箭头 + 完整内容
+
+**智能展开逻辑**:
+- 仅内容超过 20 字符时显示箭头并启用点击展开
+- 短内容保持静态胶囊，cursor-default
+
+**代码位置**: `apps/web/src/lib/components/QuickNoteCard.svelte`
+
 ### 文章排版 (Article Typography)
 详情页 prose 配置：
 - 标题: `font-serif font-semibold text-2xl md:text-4xl`
@@ -123,3 +145,5 @@ Dashboard 统计卡片：
 - Page 2: Dashboard - Admin Panel
 - Page 3: Document Detail Page
 - Page 4: Mobile Responsive Views (时间线、详情页、Admin 导航)
+- Node `LE7hb`: QuickNote Capsule Design (桌面端胶囊设计)
+- Node `PE8aA`: QuickNote Capsule - Mobile (移动端胶囊设计)

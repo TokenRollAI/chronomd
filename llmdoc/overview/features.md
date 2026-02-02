@@ -84,7 +84,12 @@
 - **混合时间线**: `/api/mixed-timeline` 端点将文档和笔记按时间合并展示
 - **UI 组件**:
   - `QuickNoteInput.svelte`: 底部固定悬浮输入栏 (`fixed bottom-0`) + 弹窗输入面板
-  - `QuickNoteCard.svelte`: 笔记卡片展示，带 "Quick Note" 标签区分
+  - `QuickNoteCard.svelte`: 胶囊式笔记展示，支持收缩/展开两种状态
+- **胶囊式设计 (Capsule Pattern)**:
+  - **收缩状态 (默认)**: 胶囊形式 (`rounded-full`)，显示日期 + 标签 + 预览 (20 字) + 箭头
+  - **展开状态**: 卡片形式 (`rounded-2xl`)，青色边框高亮，显示完整内容
+  - **智能展开**: 仅内容超过 20 字符时启用点击展开
+  - **响应式**: `h-11 md:h-10` + `w-full md:w-fit`
 - **权限控制**: 仅登录用户可见输入入口，未登录用户仅可浏览
 - **暗色模式**: 完整支持 dark mode 变体
 - **Admin 管理页面** (`/admin/quick-notes`):
