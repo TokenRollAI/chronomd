@@ -43,7 +43,7 @@ ChronoMD 采用**前后端一体化**架构，所有代码都在一个 SvelteKit
 ## 组件职责
 
 ### SvelteKit 应用
-- **页面路由**: 时间线首页、文档详情、管理后台
+- **页面路由**: 时间线首页、文档详情、管理后台 (Dashboard/Documents/Quick Notes/Folders/Settings)
 - **API 路由**: 所有 `/api/*` 端点通过 `+server.ts` 实现
 - **SSR 渲染**: 服务端数据加载和渲染
 - **静态资源**: CSS、JS、图片托管
@@ -105,6 +105,13 @@ ChronoMD 采用**前后端一体化**架构，所有代码都在一个 SvelteKit
 3. 混合时间线渲染:
    - MixedTimelineItem.type === 'document' -> 文档卡片
    - MixedTimelineItem.type === 'note' -> QuickNoteCard (带标签)
+
+4. Admin 管理页面 (/admin/quick-notes):
+   - +page.server.ts 验证 JWT -> getQuickNotes 获取列表
+   - URL 参数 ?filter=all|active|archived 控制筛选
+   - 归档/恢复: PUT /api/admin/quick-notes/:id { is_archived }
+   - 删除: DELETE /api/admin/quick-notes/:id
+   - 操作后 invalidateAll() 刷新数据
 ```
 
 ## 安全设计

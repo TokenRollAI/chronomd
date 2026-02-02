@@ -27,6 +27,7 @@ chronomd/
 │       │   └── routes/
 │       │       ├── api/             # API 路由 (+server.ts)
 │       │       ├── admin/           # 管理后台页面
+│       │       │   └── quick-notes/ # Quick Notes 管理页面
 │       │       └── [slug]/          # 文档详情页
 │       ├── migrations/              # 数据库迁移文件
 │       │   └── 0002_quick_notes.sql # Quick Notes 表迁移

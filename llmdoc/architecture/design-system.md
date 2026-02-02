@@ -95,6 +95,10 @@ Dashboard 统计卡片：
 - 仅移动端: `md:hidden`
 - 代码位置: `apps/web/src/routes/admin/+layout.svelte`
 
+### 站点标题导航 (Site Title Navigation)
+时间线页和文档详情页的 header 中，站点标题 (`<h1>`) 使用 `<a href="/">` 包裹，点击可返回首页。
+- 适用页面: `apps/web/src/routes/+page.svelte`, `apps/web/src/routes/[slug]/+page.svelte`
+
 ### 文章排版 (Article Typography)
 详情页 prose 配置：
 - 标题: `font-serif font-semibold text-2xl md:text-4xl`
