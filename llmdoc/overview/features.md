@@ -10,10 +10,11 @@
 - 支持文档摘要
 - Markdown 内容存储在 R2
 
-#### 2. 时间线首页
-- 按发布时间倒序展示文档
-- 分页支持
-- 按文件夹筛选
+#### 2. 时间流首页
+- 定位为零碎记录 / 日记的时间流（不是博客）：Quick Notes 与文档按发布时间倒序混排，文档只是较长的一条记录
+- 按日历日分组，分日使用站点设置 `timezone`（非法值回退 UTC），保证 SSR 与客户端一致
+- 分页支持（「← 较新 / 更早的记录 →」）
+- 按文件夹筛选（`?folder=` 参数）
 - 显示私密文档标记
 
 #### 3. 文件夹管理
@@ -29,7 +30,9 @@
 
 #### 5. Admin 管理面板
 - JWT 认证登录
-- 文档列表与管理
+- Dashboard 统计 (Quick notes / Documents / Published / Drafts) + 最近更新文档
+- 文档列表与管理 (新建/编辑共用 `DocumentEditor`，⌘S 保存)
+- Quick Notes 管理
 - 文件夹管理
 - 站点设置
 
@@ -57,48 +60,42 @@
 - **系统检测**: 首次访问自动检测 `prefers-color-scheme: dark`
 - **持久化**: 用户选择保存到 localStorage，下次访问保持
 - **无闪烁**: 通过 `app.html` 内联脚本在页面渲染前应用主题
-- **排版适配**: prose 内容使用 `dark:prose-invert` 自动反转
-- **全量覆盖**: 代码块、行内代码、表格、引用块、分割线、Mermaid 图表、选中文字等均有 dark 变体
+- **语义 token**: 颜色为 `app.css` 中 `:root` / `.dark` 两套 CSS 变量，组件无需 `dark:` 前缀；prose 通过 `--tw-prose-*` 变量配色
+- **全量覆盖**: 前台与 Admin、代码块、表格、引用块、Mermaid 图表、选中文字等均随 token 切换
 
-#### 9. 前端设计系统 (Design System)
-- **字体系统**: Newsreader (衬线/标题) + Inter (无衬线/正文) + JetBrains Mono (等宽/代码)
-- **主色调**: #0D6E6E (青色) 用于按钮、链接、高亮
-- **次要色**: #E07B54 (橙色) 用于草稿状态标识
-- **极简风格**: 1px 边框代替阴影，统一浅色主题
-- **标题即导航**: 站点标题为可点击链接，指向首页 (`/`)，适用于时间线页和文档详情页
-- **胶囊时间线**: 首页文档列表采用 pill 样式，悬停边框变色
-- **统一后台**: Admin 侧边栏改为浅色风格，与前台视觉一致
-- **设计源文件**: `chronomd.pen` (Pencil MCP 格式)
+#### 9. 前端设计系统 (Design System v2)
+- **语义色 token**: canvas / surface / ink / body / muted / faint / line / accent (+fg) / warn，亮暗两套值，详见 [设计系统](../architecture/design-system.md)
+- **字体系统**: Newsreader + Noto Serif SC (衬线/标题) + Inter + 中文无衬线 (正文) + JetBrains Mono (时间/代码)，在 `app.html` 统一加载
+- **共享组件类**: `.field` / `.btn-primary` / `.btn-ghost` / `.card` / `.switch` / `.admin-page` 等，位于 `app.css`
+- **日记流条目**: 左侧竖线 + 圆点时间轴，笔记全文显示 (超 6 行可展开)，文档显示标题 + 摘要 +「继续阅读 →」
+- **日记式详情页**: 标题上方显示完整日期时间 · 文件夹 · 私密，底部「← 回到时间流」
+- **标题即导航**: 站点标题为可点击链接，指向首页 (`/`)
+- **统一后台**: Admin 共用同一套 token，支持暗色模式；文档新建/编辑共用 `DocumentEditor`
+- **设计源文件**: `chronomd.pen` 中的 v2 画板
 
 #### 10. 移动端响应式设计 (Mobile-First)
 - **断点策略**: Tailwind `md:` 断点 (768px)，移动端优先设计
-- **时间线页面**: 全宽文档胶囊 (`w-full md:w-fit`)，响应式年份标签，触摸优化按钮 (`h-11 md:h-9`)
-- **文档详情**: 响应式排版 (`text-2xl md:text-4xl`)，移动端间距调整
-- **Admin 导航**: 移动端顶部导航栏 + 汉堡菜单 + 底部标签栏 (Dashboard/Documents/Folders/Settings)
-- **Admin 仪表盘**: 垂直堆叠统计卡片 (`grid-cols-1 md:grid-cols-3`)
+- **前台**: 居中单栏 (首页 600px、详情 680px)，移动端 `px-5` 边距
+- **Admin 导航**: 移动端顶部 header (View site / Logout / 主题切换) + 底部 5 项标签栏 (Dashboard / Notes / Docs / Folders / Settings)，无汉堡菜单
+- **Admin 页面**: Dashboard 统计 2 列 / 桌面 4 列；Folders 移动端隐藏 Parent / Order 列；文档编辑器在 `lg` (1024px) 以下时右侧设置面板堆叠到正文下方
 
 #### 11. Quick Notes 快速碎片化记录
-- **轻量级记录**: 允许已登录用户在首页快速记录想法，无需创建完整文档
+- **主体内容**: Quick Notes 是时间流的主要内容形态；已登录用户在首页即可记录，无需创建完整文档
 - **独立数据表**: `quick_notes` 表独立于 `documents` 表，字段简洁 (id, content, created_at, updated_at, is_archived)
 - **内容限制**: 最大 500 字，带字数统计显示
-- **混合时间线**: `/api/mixed-timeline` 端点将文档和笔记按时间合并展示
+- **混合时间线**: 首页 load 调用 `getMixedTimeline` 将文档和笔记按时间合并（同样逻辑对外暴露为 `/api/mixed-timeline`）
 - **UI 组件**:
-  - `QuickNoteInput.svelte`: 底部固定悬浮输入栏 (`fixed bottom-0`) + 弹窗输入面板
-  - `QuickNoteCard.svelte`: 胶囊式笔记展示，支持收缩/展开两种状态
-- **胶囊式设计 (Capsule Pattern)**:
-  - **收缩状态 (默认)**: 胶囊形式 (`rounded-full`)，显示日期 + 标签 + 预览 (20 字) + 箭头
-  - **展开状态**: 卡片形式 (`rounded-2xl`)，青色边框高亮，显示完整内容
-  - **智能展开**: 仅内容超过 20 字符时启用点击展开
-  - **响应式**: `h-11 md:h-10` + `w-full md:w-fit`
+  - `Composer.svelte`: 首页顶部内嵌输入框（仅登录且第 1 页显示），自动增高，⌘/Ctrl+Enter 发送，Esc 失焦，成功后 `invalidateAll` 刷新
+  - `StreamEntry.svelte`: 时间流条目，笔记全文显示，超过 6 行时出现「展开 / 收起」
 - **权限控制**: 仅登录用户可见输入入口，未登录用户仅可浏览
-- **暗色模式**: 完整支持 dark mode 变体
+- **暗色模式**: 随设计 token 自动适配
 - **Admin 管理页面** (`/admin/quick-notes`):
   - 状态筛选: All / Active / Archived 三种视图切换
   - 归档/恢复: 一键归档或恢复笔记
   - 删除笔记: 带确认对话框的删除功能
   - 响应式设计: 桌面端和移动端适配
-  - 侧边栏导航: 位于 Documents 和 Folders 之间
-  - 移动端底部标签栏: 新增 Quick Notes 入口
+  - 侧边栏导航: 位于 Dashboard 之后、Documents 之前
+  - 移动端底部标签栏: 短标签 Notes
 
 #### 12. PWA 渐进式 Web 应用 (Progressive Web App)
 - **离线支持**: 通过 Service Worker (Workbox) 实现静态资源预缓存和运行时缓存
@@ -109,7 +106,7 @@
   - Google Fonts: CacheFirst (365天过期)
   - API 请求: NetworkFirst (24小时过期，10秒超时回退)
 - **iOS 适配**: apple-touch-icon、apple-mobile-web-app-capable meta 标签
-- **主题色**: `#0D6E6E` 与设计系统主色调一致
+- **主题色**: manifest `theme_color` 为 `#0D6E6E` (亮色 accent)；`app.html` 的 `theme-color` meta 按亮/暗分别为 `#FAFAF9` / `#0E0D0C` (canvas)
 
 ### 计划功能 📋
 

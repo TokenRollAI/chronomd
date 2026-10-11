@@ -2,12 +2,12 @@
 
 ## 项目背景
 
-ChronoMD 是一个面向个人博主和内容创作者的极简 Markdown 发布平台，采用时间线作为核心展示方式，让读者可以按时间顺序浏览内容。
+ChronoMD 是一个极简的个人记录平台，用按日分组的时间流承载零碎的记录和日记。Quick Notes 是主体内容，Markdown 文档在流中只是较长的一条记录。它不是博客：用户的博客另有其处，用于长篇完整写作。
 
 ## 设计理念
 
 - **极简主义**: 专注于内容本身，移除不必要的功能
-- **时间线优先**: 以时间为主线组织内容，符合博客阅读习惯
+- **时间流优先**: 以时间为主线、按日组织记录，刻意避开博客范式 (文章索引、阅读时长、长文标签、年度归档)
 - **Serverless**: 基于 Cloudflare 生态，零服务器运维成本
 
 ## 技术栈
@@ -47,7 +47,7 @@ chronomd/
 │       ├── src/
 │       │   ├── lib/           # 共享代码
 │       │   │   ├── stores/    # Svelte stores (auth, theme)
-│       │   │   └── components/ # UI 组件 (ThemeToggle)
+│       │   │   └── components/ # UI 组件 (SiteHeader, Composer, StreamEntry, ThemeToggle 等)
 │       │   └── routes/        # 页面路由
 │       └── svelte.config.js
 │

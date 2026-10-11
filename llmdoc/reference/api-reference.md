@@ -209,15 +209,40 @@
 ---
 
 ### GET /api/admin/documents
-获取文档列表
+获取文档列表 (含草稿)，按 `updated_at` 倒序
 
 **Query 参数:**
 | 参数      | 类型    | 描述               |
 |-----------|---------|-------------------|
-| page      | number  | 页码               |
-| limit     | number  | 每页数量           |
-| folder_id | string  | 文件夹 ID 筛选     |
-| published | boolean | 发布状态筛选       |
+| page      | number  | 页码，默认 1        |
+| limit     | number  | 每页数量，默认 20，上限 100 |
+| published | `true` \| `false` | 发布状态筛选；省略则返回全部。注意：除 `true` 以外的任何值都按 `false` 处理 |
+
+`total` 随 `published` 筛选计算，Dashboard 的草稿数即 `总数 - published=true 的总数`。
+
+**响应:**
+```json
+{
+  "success": true,
+  "data": {
+    "items": [
+      {
+        "id": "abc123",
+        "title": "文章标题",
+        "slug": "my-article",
+        "folder_id": "folder123",
+        "folder": { "id": "folder123", "name": "技术", "slug": "tech" },
+        "is_published": 1,
+        "is_private": 0,
+        "updated_at": "2024-01-01T00:00:00.000Z"
+      }
+    ],
+    "total": 10
+  }
+}
+```
+
+每项通过 LEFT JOIN `folders` 附带 `folder: { id, name, slug } | null`（未归类或文件夹不存在时为 `null`），前端类型为 `AdminDocument.folder?`。
 
 ---
 

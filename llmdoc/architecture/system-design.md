@@ -35,7 +35,7 @@ ChronoMD 采用**前后端一体化**架构，所有代码都在一个 SvelteKit
 - **运行时**: Cloudflare Pages Functions (Workers 运行时)
 - **框架**: SvelteKit + adapter-cloudflare
 - **样式**: Tailwind CSS + @tailwindcss/typography (暗色模式: `class` 策略)
-- **设计系统**: 极简现代风格，详见 [设计系统](./design-system.md)
+- **设计系统**: 零碎记录 / 日记流定位的语义 token 体系，详见 [设计系统](./design-system.md)
 - **数据库**: Cloudflare D1 (SQLite)
 - **存储**: Cloudflare R2
 - **认证**: JWT (jose 库)
@@ -43,9 +43,9 @@ ChronoMD 采用**前后端一体化**架构，所有代码都在一个 SvelteKit
 ## 组件职责
 
 ### SvelteKit 应用
-- **页面路由**: 时间线首页、文档详情、管理后台 (Dashboard/Documents/Quick Notes/Folders/Settings)
+- **页面路由**: 时间流首页、文档详情、管理后台 (Dashboard/Documents/Quick Notes/Folders/Settings)
 - **API 路由**: 所有 `/api/*` 端点通过 `+server.ts` 实现
-- **SSR 渲染**: 服务端数据加载和渲染
+- **SSR 渲染**: 前台页面服务端数据加载和渲染；Admin 关闭 SSR (见下文 Admin 渲染模式)
 - **静态资源**: CSS、JS、图片托管
 
 ### 服务端模块 (`$lib/server/`)
@@ -90,21 +90,22 @@ ChronoMD 采用**前后端一体化**架构，所有代码都在一个 SvelteKit
 ### Quick Notes 数据流
 ```
 1. 首页加载流程:
-   - +page.server.ts 验证 JWT token 判断登录状态
-   - 已登录: 调用 getMixedTimeline 获取混合时间线
-   - 未登录: 调用 getTimeline 仅获取文档列表
-   - 渲染时根据 isLoggedIn 显示/隐藏 QuickNoteInput
+   - +page.server.ts 调用 getMixedTimeline 获取文档 + 笔记的混合时间线
+   - 同时验证 JWT token 得到 isLoggedIn
+   - 已登录且在第 1 页时渲染内嵌 Composer 输入框
 
 2. 创建笔记流程:
-   - 用户点击底部悬浮输入栏展开弹窗
-   - 输入内容 (500字限制，实时字数统计)
+   - 用户在首页顶部 Composer 中输入 (500字限制，聚焦时显示字数)
+   - 点击「记录」或 ⌘/Ctrl+Enter -> adminApi.createQuickNote
    - POST /api/admin/quick-notes
    - 验证 JWT -> 写入 D1 quick_notes 表
-   - 刷新时间线
+   - Composer 派发 created -> invalidateAll() 刷新时间流
 
 3. 混合时间线渲染:
-   - MixedTimelineItem.type === 'document' -> 文档卡片
-   - MixedTimelineItem.type === 'note' -> QuickNoteCard (带标签)
+   - groupByDay(items, settings.timezone) 按站点时区分日
+   - 每条记录由 StreamEntry 渲染:
+     MixedTimelineItem.type === 'note' -> 全文 (超 6 行可展开)
+     MixedTimelineItem.type === 'document' -> 标题 + 摘要 + 「继续阅读 →」
 
 4. Admin 管理页面 (/admin/quick-notes):
    - +page.server.ts 验证 JWT -> getQuickNotes 获取列表
@@ -113,6 +114,12 @@ ChronoMD 采用**前后端一体化**架构，所有代码都在一个 SvelteKit
    - 删除: DELETE /api/admin/quick-notes/:id
    - 操作后 invalidateAll() 刷新数据
 ```
+
+### Admin 渲染模式
+- `routes/admin/+layout.ts` 设置 `export const ssr = false`，整个 Admin 作为客户端应用渲染。
+- 原因：多数 Admin 页面的 `+page.ts` load 通过浏览器端 `adminApi`（相对 URL + auth cookie）取数，在 SSR 中无法执行；未关闭 SSR 时直接打开或刷新任意 Admin 页面会返回 500。
+- `+page.server.ts` load（如 `/admin/quick-notes`）不受影响，仍在服务端执行并验证 JWT。
+- 新增 Admin 页面若使用 `adminApi` 取数，保持在该 layout 下即可；不要为单页重新开启 SSR。
 
 ## 安全设计
 
@@ -140,14 +147,14 @@ ChronoMD 采用 Tailwind CSS `class` 策略实现暗色模式，核心组件如�
 - `apps/web/src/app.html` (内联脚本): 页面渲染前检测 localStorage / 系统偏好，立即添加 `dark` class 避免闪烁。
 - `apps/web/src/lib/stores/theme.ts` (`createThemeStore`, `theme`): Svelte writable store，管理主题状态、localStorage 持久化和 `toggle()` 切换方法。
 - `apps/web/src/lib/components/ThemeToggle.svelte`: 太阳/月亮图标切换按钮，调用 `theme.toggle()`。
-- `apps/web/src/app.css`: 所有自定义样式的 `.dark` 前缀变体（代码块、表格、引用块、Mermaid 等）。
+- `apps/web/src/app.css`: `:root` / `.dark` 两套语义色 CSS 变量 (`--c-*`)，Tailwind 颜色和 prose 配色都引用这些变量，详见 [设计系统](./design-system.md)。
 
 ### 执行流
 
 - **1. 初始加载:** `app.html` 内联脚本读取 `localStorage.theme`，若为 `dark` 或系统偏好为 dark，则在 `<html>` 上添加 `dark` class。
 - **2. 客户端激活:** `+layout.svelte` 引入 `theme` store，store 初始化时同步读取 localStorage 并调用 `apply()` 确保状态一致。
 - **3. 用户切换:** 用户点击 `ThemeToggle` 按钮 -> `theme.toggle()` -> `update()` 切换值 -> `apply()` 更新 DOM class 和 localStorage。
-- **4. 样式响应:** Tailwind `dark:` 变体和 `app.css` 中的 `.dark` 选择器自动生效。
+- **4. 样式响应:** `.dark` 下的 CSS 变量覆盖使所有 token 颜色自动切换，组件无需 `dark:` 变体。
 
 ## PWA 架构
 
@@ -156,7 +163,7 @@ ChronoMD 通过 `@vite-pwa/sveltekit` 插件集成 PWA 支持，实现离线访�
 ### 核心组件
 
 - `apps/web/vite.config.ts` (`SvelteKitPWA`): PWA 插件配置入口，定义 manifest、注册策略和 Workbox 缓存规则。
-- `apps/web/src/app.html` (PWA meta 标签): `theme-color`、`apple-touch-icon`、`apple-mobile-web-app-capable` 等标签。
+- `apps/web/src/app.html` (PWA meta 标签): 按亮/暗区分的 `theme-color`、`apple-touch-icon`、`apple-mobile-web-app-capable` 等标签。
 - `apps/web/static/icon-192x192.png`, `icon-512x512.png`, `apple-touch-icon.png`: PWA 图标资源。
 
 ### 执行流

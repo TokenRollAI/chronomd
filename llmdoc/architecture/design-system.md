@@ -1,149 +1,122 @@
-# 前端设计系统
+# 前端设计系统 (v2)
 
 ## 1. Identity
 
-- **What it is:** ChronoMD 的前端视觉设计系统，定义了字体、颜色、组件样式等设计规范。
-- **Purpose:** 提供统一的极简现代风格 UI，确保前台和后台视觉一致性。
+- **What it is:** ChronoMD 前台与 Admin 的统一视觉系统：语义色 token、字体、共享组件类和核心 UI 模式。
+- **Purpose:** 服务于产品定位——ChronoMD 是**零碎记录 / 日记的时间流**，不是博客。用户的博客另有其处，用于长篇完整写作；这里 Quick Notes 是主体内容，Markdown 文档只是流中"较长的一条记录"。
+- **定位约束 (2026-10-11 用户决策):** 避免博客范式——不做文章索引、阅读时长、"长文"标签、按年归档。新增 UI 时以"日记流"而非"文章列表"为基准。
 
 ## 2. Core Components
 
-- `apps/web/tailwind.config.js` (fontFamily, colors, typography): Tailwind 主题配置，定义字体族、主色调和排版样式。
-- `apps/web/src/routes/+page.svelte` (yearGroups, timeline): 首页时间线视图，使用胶囊样式展示文档列表。
-- `apps/web/src/routes/admin/+layout.svelte` (navItems, getIcon): Admin 侧边栏布局，浅色主题导航。
-- `apps/web/src/routes/admin/+page.svelte` (stats, recentDocs): Dashboard 页面，极简卡片式数据展示。
-- `apps/web/src/routes/[slug]/+page.svelte` (displayContent): 文档详情页，serif 标题 + 优化的 prose 排版。
+- `apps/web/src/app.css`: 设计 token (CSS 变量，`:root` / `.dark`)、prose 配色与排版、`@layer components` 共享类。
+- `apps/web/tailwind.config.js` (`token`, `colors`, `fontFamily`): 把 CSS 变量映射为 Tailwind 语义色和字体族。
+- `apps/web/src/app.html`: 一次性加载 Google Fonts (含 preconnect)，light/dark 两条 `theme-color` meta。
+- `apps/web/src/lib/utils/time.ts` (`groupByDay`, `timeOfDay`, `fullDateTime`): 按站点时区分日与格式化时间。
+- `apps/web/src/lib/components/StreamEntry.svelte`、`Composer.svelte`、`SiteHeader.svelte`、`ThemeToggle.svelte`: 前台时间流组件。
+- `apps/web/src/lib/components/DocumentEditor.svelte`、`DocumentRow.svelte`: Admin 共享组件。
 
 ## 3. Design Tokens
 
-### 字体系统 (Font Stack)
-| 用途 | 字体族 | CSS Class |
-|------|--------|-----------|
-| 标题 | Newsreader (衬线) | `font-serif` |
-| 正文/UI | Inter (无衬线) | `font-sans` |
-| 代码/数据 | JetBrains Mono | `font-mono` |
+### 颜色 (语义 token)
+定义为 RGB 通道的 CSS 变量 `--c-*`，Tailwind 通过 `rgb(var(--c-x) / <alpha-value>)` 引用，因此透明度修饰符可用 (如 `bg-accent/[0.07]`、`bg-warn/10`)。
 
-### 颜色系统 (Color Palette)
-| 用途 | 色值 | CSS |
-|------|------|-----|
-| 主色 (按钮/链接) | #0D6E6E (青色) | `text-[#0D6E6E]`, `bg-[#0D6E6E]` |
-| 次要色 (草稿状态) | #E07B54 (橙色) | `text-[#E07B54]` |
-| 页面背景 | #FAFAFA | `bg-[#FAFAFA]` |
-| 卡片背景 | #FFFFFF | `bg-white` |
-| 边框 | #E5E5E5 | `border-[#E5E5E5]` |
-| 主要文字 | #1A1A1A | `text-[#1A1A1A]` |
-| 次要文字 | #666666 | `text-[#666666]` |
-| 辅助文字 | #888888 | `text-[#888888]` |
+| Token (Tailwind) | 用途 | Light | Dark |
+|------|------|------|------|
+| `canvas` | 页面背景 | #FAFAF9 | #0E0D0C |
+| `surface` | 卡片 / 输入框背景 | #FFFFFF | #181716 |
+| `ink` | 标题、主要文字 | #1C1917 | #F5F5F4 |
+| `body` | 正文 (笔记、prose) | #44403C | #D6D3D1 |
+| `muted` | 次要文字 | #78716C | #A8A29E |
+| `faint` | 辅助文字、时间、圆点 | #A8A29E | #6B6560 |
+| `line` | 边框、分隔线、时间线竖线 | #E7E5E4 | #2A2826 |
+| `accent` | 链接、主按钮、激活态、已发布 | #0D6E6E | #5FB3AC |
+| `accent-fg` | accent 背景上的文字 | #FFFFFF | #0E0D0C |
+| `warn` | 草稿状态、错误、字数超限 | #C2410C | #F0A070 |
 
-## 4. Responsive Design (Mobile-First)
+**规则:** 组件中不要再写硬编码色值 (旧的 `text-[#0D6E6E]`、`border-[#E5E5E5]`、`stone-*` / `gray-*` 写法与 `primary-*` 色板已全部移除，一律改用语义 token)。暗色模式完全由 `.dark` 下的变量覆盖实现，组件无需 `dark:` 前缀；prose 配色通过 `--tw-prose-*` 变量指向 token，不使用 `dark:prose-invert`。例外：代码块背景、Shiki 高亮行等固定为深色的样式在 `app.css` 中直接写色值。
 
-### 断点系统
-| 断点 | 宽度 | 用途 |
+### 字体
+| 变量 / Class | 字体栈 | 用途 |
 |------|------|------|
-| 默认 | < 768px | 移动端 |
-| `md:` | >= 768px | 桌面端 |
+| `--font-sans` / `font-sans` | Inter + PingFang SC / Hiragino Sans GB / Microsoft YaHei / Noto Sans SC | 正文、UI |
+| `--font-serif` / `font-serif` | Newsreader + Noto Serif SC | 页面标题、日期标题、文档标题 |
+| `--font-mono` / `font-mono` | JetBrains Mono | 时间、字数、slug、代码 |
 
-### 时间线页面 (`+page.svelte`)
-- **文档胶囊**: `w-full md:w-fit` - 移动端全宽，桌面端自适应
-- **年份标签**: 仅移动端显示的响应式年份分组标签
-- **按钮高度**: `h-11 md:h-9` - 移动端触摸优化 (44px)
-- 代码位置: `apps/web/src/routes/+page.svelte`
+- 字体只在 `app.html` 加载一次；页面内不要再单独引入字体 `<link>`。
+- prose：正文 sans，h1–h4 serif；内容内 h1/h2/h3 缩小 (1.5em / 1.3em / 1.12em)，保证低于页面标题层级。
 
-### 文档详情页 (`[slug]/+page.svelte`)
-- **标题排版**: `text-2xl md:text-4xl` - 响应式字号
-- **水平间距**: `px-5 md:px-6` - 移动端紧凑边距
-- **垂直间距**: `py-6 md:py-12` - 移动端紧凑内边距
-- 代码位置: `apps/web/src/routes/[slug]/+page.svelte`
+### 共享组件类 (`app.css` `@layer components`)
+| Class | 用途 |
+|------|------|
+| `.field` / `.field-label` | 输入框 (`textarea.field` 自动变高) 与表单标签 |
+| `.btn` / `.btn-primary` / `.btn-ghost` | 全圆角 (`rounded-full`) 按钮基类 / accent 实心 / 描边 |
+| `.card` | `surface` 背景 + `line` 边框 + `rounded-xl` |
+| `.switch` | 开关外观，必须紧跟在 `<input type="checkbox" class="peer sr-only">` 之后 (依赖 `peer-checked`) |
+| `.admin-page` / `.admin-title` | Admin 页面容器 (max 992px) / serif 页面标题 |
+| `.alert-error` / `.alert-success` | warn / accent 浅底提示条 |
 
-### Admin 移动端导航 (`admin/+layout.svelte`)
-- **顶部导航栏**: 固定高度 `h-16`，含汉堡菜单按钮
-- **侧边滑出面板**: 汉堡菜单触发的移动端导航
-- **底部标签栏**: 固定定位 `h-16 z-40`，4 个导航项 (Dashboard, Documents, Folders, Settings)
-- **桌面端侧边栏**: `hidden md:flex` - 仅桌面端显示
-- 代码位置: `apps/web/src/routes/admin/+layout.svelte`
+## 4. 前台模式 (Public)
 
-### Admin 仪表盘 (`admin/+page.svelte`)
-- **统计卡片网格**: `grid-cols-1 md:grid-cols-3` - 移动端垂直堆叠
-- **新建按钮**: 响应式尺寸和文字
-- **文档列表**: 移动端优化的列表项间距
-- 代码位置: `apps/web/src/routes/admin/+page.svelte`
+### 时间流首页 (`routes/+page.svelte`)
+- 600px 单栏；`SiteHeader` (标题链接回 `/` + ThemeToggle)，其下显示 `site_description`。
+- 登录且在第 1 页时，顶部内嵌 `Composer`。
+- 条目按**日历日**分组 (`groupByDay`)，日期标题为 serif「10月8日」+ faint「周四」，非当年才加年份前缀。
+- 分页文案「← 较新 / 更早的记录 →」，UI 文案为中文。
 
-## 5. UI Patterns
+### 时区一致性 (`lib/utils/time.ts`)
+分日与时间格式化统一使用 `settings.timezone`（非法值回退 UTC）。原因：Workers SSR 运行在 UTC，若用运行环境本地时区，服务端与客户端会分出不同的日组并导致 hydration 不一致。新增任何日期展示都应走这些 helper 并传入站点时区。
 
-### 时间线胶囊 (Timeline Capsule)
-首页文档列表采用胶囊样式：
-- 圆角: `rounded-full`
-- 高度: `h-11 md:h-9` (触摸优化)
-- 宽度: `w-full md:w-fit` (移动端全宽)
-- 边框: 1px `border-[#E5E5E5]`
-- Hover: `hover:border-[#0D6E6E]`
-- 代码位置: `apps/web/src/routes/+page.svelte`
+### 时间流条目 (`StreamEntry.svelte`)
+- 左侧竖线就是 `<article>` 的 `border-l`（当天最后一条设为透明，竖线在日组内收尾）；圆点绝对定位在竖线上，第 1 页最新一条用 accent 高亮，其余 faint。
+- 时间 `HH:mm`，mono faint。
+- 笔记：完整显示原文，`line-clamp-6`；挂载时测量是否溢出，仅溢出时显示「展开 / 收起」。
+- 文档：serif 标题 + 摘要 (`line-clamp-2`) + 「继续阅读 →」；私密文档显示锁图标，不显示摘要，链接文案为「需要访问码」。
 
-### Admin 卡片 (Admin Card)
-Dashboard 统计卡片：
-- 圆角: `rounded-xl`
-- 边框: 1px `border-[#E5E5E5]`
-- 网格: `grid-cols-1 md:grid-cols-3`
-- 无阴影 (flat design)
-- 代码位置: `apps/web/src/routes/admin/+page.svelte`
+### 内联输入 (`Composer.svelte`)
+- 自动增高的 textarea，占位「此刻在想什么…」，500 字上限，聚焦或有内容时才显示字数与「记录」按钮。
+- ⌘/Ctrl+Enter 提交，Esc 失焦；成功后派发 `created`，首页以 `invalidateAll` 刷新。
+- 取代旧的底部固定悬浮栏 + 弹窗方案。
 
-### 底部标签栏 (Bottom Tab Bar)
-移动端专用导航：
-- 高度: `h-16` (64px)
-- 位置: `fixed bottom-0 left-0 right-0 z-40`
-- 图标: Dashboard, Documents (FileText), Folders, Settings
-- 主色高亮: `text-[#0D6E6E]` (当前页)
-- 仅移动端: `md:hidden`
-- 代码位置: `apps/web/src/routes/admin/+layout.svelte`
+### 详情页 (`routes/[slug]/+page.svelte`)
+- 680px 单栏，日记式：顶部「← 时间流」，标题上方 meta 行 `fullDateTime` (如「2026年10月5日 周日 · 14:20」) · 文件夹 (accent) · 私密；serif 标题；prose 正文；底部「← 回到时间流」。
+- 解锁表单使用 `.field` / `.btn-primary`。
 
-### 站点标题导航 (Site Title Navigation)
-时间线页和文档详情页的 header 中，站点标题 (`<h1>`) 使用 `<a href="/">` 包裹，点击可返回首页。
-- 适用页面: `apps/web/src/routes/+page.svelte`, `apps/web/src/routes/[slug]/+page.svelte`
+## 5. Admin 模式
 
-### QuickNote 胶囊 (QuickNote Capsule)
-Quick Notes 采用可展开的胶囊式设计，区别于文档胶囊：
+### Shell (`routes/admin/+layout.svelte`)
+- 桌面：232px 侧边栏；激活项为 `bg-accent/[0.07]` 浅底 + accent 图标 (不用实心青色)；导航顺序 Dashboard、Quick Notes、Documents、Folders、Settings；底部 View site / Logout / ThemeToggle。
+- 移动：顶部 header (View site / Logout / 主题图标) + 底部 5 项标签栏 (短标签 Notes / Docs)；不再有汉堡滑出菜单。
+- `/admin/login` 不渲染 shell (`isLogin`)。
+- Admin 已完整支持暗色模式。
 
-**收缩状态 (默认)**:
-- 形状: `rounded-full` (胶囊)
-- 高度: `h-11 md:h-10` (触摸优化)
-- 宽度: `w-full md:w-fit` (移动端全宽)
-- 边框: `border-[#E5E5E5]`，Hover 时 `border-[#0D6E6E]`
-- 内容: 日期 + "Quick Note" 标签 + 内容预览 (20字) + 下箭头
+### 页面模式
+- **Dashboard:** 4 项无卡片统计 (Quick notes / Documents / Published / Drafts)，下方最近更新列表。
+- **`DocumentRow`:** 标题 + 私密锁、文件夹、状态圆点 (accent=Published，warn=Draft)、紧凑日期；Dashboard 与 Documents 列表共用。
+- **`DocumentEditor`:** 新建与编辑共用。面包屑 + View (编辑时) + Create/Save，⌘S 保存；左侧无边框 serif 标题、摘要和 mono 正文 textarea 卡片；右侧 272px 面板 (`lg` 以下堆叠到下方)：Slug、Folder、Published / Private 开关、访问码、Delete (编辑时)。
+- **Quick Notes:** 全圆角 pill 筛选标签 (All / Active / Archived)，操作按钮在桌面端 hover / focus 时显现 (移动端常显)。
+- **Folders:** 移动端隐藏 Parent / Order 列。
+- **Settings:** 时区字段提示 "Used to group the stream by day"。
 
-**展开状态 (点击后)**:
-- 形状: `rounded-2xl` (卡片)
-- 边框: `border-[#0D6E6E]` (青色高亮)
-- 内边距: `p-4`
-- 内容: 完整日期时间 + 标签 + 上箭头 + 完整内容
+## 6. Responsive
 
-**智能展开逻辑**:
-- 仅内容超过 20 字符时显示箭头并启用点击展开
-- 短内容保持静态胶囊，cursor-default
+- 主断点 `md:` (768px)，移动端优先；`DocumentEditor` 的双栏额外使用 `lg:` (1024px)。
+- 前台为居中单栏，移动端 `px-5`，桌面端靠 max-width 收窄。
+- Admin 移动端以底部标签栏为主导航，`main` 预留 `pb-20`。
 
-**代码位置**: `apps/web/src/lib/components/QuickNoteCard.svelte`
+## 7. Design Rationale
 
-### 文章排版 (Article Typography)
-详情页 prose 配置：
-- 标题: `font-serif font-semibold text-2xl md:text-4xl`
-- 正文: `text-[#666666]` + `leading-relaxed`
-- 链接: `text-[#0D6E6E] underline`
-- 代码位置: `apps/web/src/routes/[slug]/+page.svelte`
+- **日记流而非博客**: 按日分组 + 竖线时间轴让零碎记录有连续感；文档与笔记同流，不单独建立"文章"区。
+- **语义 token**: 一套变量同时驱动亮/暗两态，组件不再分支书写暗色样式，也避免硬编码色值漂移。
+- **衬线标题 + 无衬线正文**: 日期、标题有书写感，正文保持易读。
+- **1px 边框代替阴影**: 保持轻盈、低噪音。
+- **克制的强调色**: accent 只用于链接、主操作、激活与已发布态；warn 只用于草稿和错误。
 
-## 6. Design Rationale
+## 8. Design Source
 
-- **1px 边框代替阴影**: 减少视觉噪音，保持页面轻盈
-- **统一浅色主题**: Admin 和前台使用相同的浅色基调，通过 dark mode 支持暗色
-- **衬线标题 + 无衬线正文**: 增加层次感，提升阅读体验
-- **胶囊式交互**: 清晰的点击区域，现代感强
-- **移动端优先 (Mobile-First)**: 默认样式针对移动端，通过 `md:` 断点增强桌面端体验
-- **触摸优化**: 移动端按钮高度 44px (h-11)，符合 iOS Human Interface Guidelines
-- **底部标签栏导航**: 移动端采用原生 App 式底部导航，提升可达性
+设计原稿 `chronomd.pen` (Pencil MCP 格式)，当前有效的是 y≥1700 的 v2 画板：
+- `v2 · Stream - Desktop`、`v2 · Stream - Mobile`
+- `v2 · Entry Detail - Desktop`
+- `v2 · Admin Dashboard - Desktop`、`v2 · Admin Edit Document - Desktop`
+- pen 变量 `v2-bg` / `v2-surface` / `v2-ink` / `v2-body` / `v2-muted` / `v2-faint` / `v2-line` / `v2-accent` / `v2-accent-soft` / `v2-warn`，含 light/dark 主题，对应 `app.css` token。
 
-## 7. Design Source
-
-设计原稿: `chronomd.pen` (Pencil MCP 格式)
-- Page 1: Timeline - Public View
-- Page 2: Dashboard - Admin Panel
-- Page 3: Document Detail Page
-- Page 4: Mobile Responsive Views (时间线、详情页、Admin 导航)
-- Node `LE7hb`: QuickNote Capsule Design (桌面端胶囊设计)
-- Node `PE8aA`: QuickNote Capsule - Mobile (移动端胶囊设计)
+旧画板 (Timeline、Dashboard、Document Detail、Mobile Views，以及 QuickNote 胶囊设计 `LE7hb` / `PE8aA` 等) 已被取代，不再作为实现依据。

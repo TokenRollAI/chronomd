@@ -1,6 +1,6 @@
 # ChronoMD 文档索引
 
-ChronoMD 是一个基于 Cloudflare 生态系统的极简个人 Markdown 发布平台，以时间线为核心展示方式。
+ChronoMD 是一个基于 Cloudflare 生态系统的极简个人记录平台，以按日分组的时间流承载零碎记录与日记（Quick Notes 为主，Markdown 文档是较长的一条记录）；它不是博客，长篇完整写作在用户的独立博客中。
 
 ## 项目结构
 
@@ -20,13 +20,17 @@ chronomd/
 │       │   │   │   ├── auth.ts      # 认证状态
 │       │   │   │   └── theme.ts     # 暗色模式主题状态
 │       │   │   ├── components/      # UI 组件
+│       │   │   │   ├── SiteHeader.svelte      # 前台站点标题 + 主题切换
 │       │   │   │   ├── ThemeToggle.svelte     # 主题切换按钮
-│       │   │   │   ├── QuickNoteInput.svelte  # 快速笔记输入组件
-│       │   │   │   └── QuickNoteCard.svelte   # 快速笔记卡片组件
-│       │   │   └── utils/           # 前端工具
+│       │   │   │   ├── Composer.svelte        # 首页内嵌 Quick Note 输入框
+│       │   │   │   ├── StreamEntry.svelte     # 时间流单条记录 (笔记/文档)
+│       │   │   │   ├── DocumentEditor.svelte  # Admin 文档新建/编辑共用编辑器
+│       │   │   │   └── DocumentRow.svelte     # Admin 文档列表行
+│       │   │   └── utils/           # 前端工具 (markdown, time: 按时区分日)
+│       │   ├── app.css              # 设计 token (CSS 变量) + 共享组件类
 │       │   └── routes/
 │       │       ├── api/             # API 路由 (+server.ts)
-│       │       ├── admin/           # 管理后台页面
+│       │       ├── admin/           # 管理后台页面 (+layout.ts: ssr = false)
 │       │       │   └── quick-notes/ # Quick Notes 管理页面
 │       │       └── [slug]/          # 文档详情页
 │       ├── migrations/              # 数据库迁移文件
@@ -62,7 +66,7 @@ chronomd/
 - [系统架构](./architecture/system-design.md) - 整体架构设计
 - [API 设计](./architecture/api-design.md) - API 端点和数据流
 - [数据库设计](./architecture/database-design.md) - D1 Schema 设计
-- [设计系统](./architecture/design-system.md) - 前端视觉设计规范 (字体、颜色、组件)
+- [设计系统](./architecture/design-system.md) - 日记流定位、语义色 token、字体、共享组件类、时间流与 Admin UI 模式
 
 ### 参考文档 (reference/)
 - [API 参考](./reference/api-reference.md) - 完整 API 文档
