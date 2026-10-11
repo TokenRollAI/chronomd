@@ -178,15 +178,25 @@ export async function unlockDocument(db: D1Database, slug: string, accessCode: s
 }
 
 // Admin Documents
-export async function getAdminDocuments(db: D1Database, options: { page?: number; limit?: number } = {}): Promise<{ items: Document[]; total: number }> {
+export async function getAdminDocuments(db: D1Database, options: { page?: number; limit?: number; published?: boolean } = {}): Promise<{ items: (Document & { folder: { id: string; name: string; slug: string } | null })[]; total: number }> {
   const page = options.page || 1;
   const limit = Math.min(options.limit || 20, 100);
   const offset = (page - 1) * limit;
+  const where = options.published === undefined ? '' : `WHERE d.is_published = ${options.published ? 1 : 0}`;
 
-  const result = await db.prepare('SELECT * FROM documents ORDER BY updated_at DESC LIMIT ? OFFSET ?').bind(limit, offset).all<Document>();
-  const countResult = await db.prepare('SELECT COUNT(*) as count FROM documents').first<{ count: number }>();
+  const result = await db.prepare(
+    `SELECT d.*, f.name as folder_name, f.slug as folder_slug
+     FROM documents d LEFT JOIN folders f ON d.folder_id = f.id
+     ${where} ORDER BY d.updated_at DESC LIMIT ? OFFSET ?`
+  ).bind(limit, offset).all<Document & { folder_name: string | null; folder_slug: string | null }>();
+  const countResult = await db.prepare(`SELECT COUNT(*) as count FROM documents d ${where}`).first<{ count: number }>();
 
-  return { items: result.results || [], total: countResult?.count || 0 };
+  const items = (result.results || []).map(({ folder_name, folder_slug, ...doc }) => ({
+    ...doc,
+    folder: doc.folder_id && folder_name ? { id: doc.folder_id, name: folder_name, slug: folder_slug || '' } : null
+  }));
+
+  return { items, total: countResult?.count || 0 };
 }
 
 export async function getAdminDocumentById(db: D1Database, id: string): Promise<Document | null> {

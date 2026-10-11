@@ -99,95 +99,93 @@
   <title>Folders - ChronoMD Admin</title>
 </svelte:head>
 
-<div class="p-8">
-  <div class="flex items-center justify-between mb-8">
-    <h1 class="text-2xl font-bold text-gray-900">Folders</h1>
-    <button on:click={startCreate} class="btn btn-primary">New Folder</button>
+<div class="admin-page">
+  <div class="flex items-center justify-between gap-4">
+    <h1 class="admin-title">Folders</h1>
+    {#if !showForm}
+      <button on:click={startCreate} class="btn-primary">
+        <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+        </svg>
+        New folder
+      </button>
+    {/if}
   </div>
 
   {#if showForm}
-    <div class="bg-white rounded-lg shadow-sm border border-gray-200 p-6 mb-6 max-w-xl">
-      <h2 class="text-lg font-semibold text-gray-900 mb-4">
-        {editingId ? 'Edit Folder' : 'New Folder'}
-      </h2>
+    <form on:submit|preventDefault={handleSubmit} class="card p-5 md:p-6 mt-6 max-w-xl">
+      <h2 class="text-sm font-medium text-ink">{editingId ? 'Edit folder' : 'New folder'}</h2>
 
-      <form on:submit|preventDefault={handleSubmit}>
-        {#if error}
-          <div class="bg-red-50 text-red-700 px-4 py-3 rounded-lg mb-4">{error}</div>
-        {/if}
+      {#if error}
+        <div class="alert-error mt-4">{error}</div>
+      {/if}
 
-        <div class="space-y-4">
-          <div>
-            <label for="name" class="form-label">Name *</label>
-            <input type="text" id="name" bind:value={name} class="form-input" required />
-          </div>
-
-          <div>
-            <label for="slug" class="form-label">Slug (optional)</label>
-            <input type="text" id="slug" bind:value={slug} class="form-input" placeholder="auto-generated" />
-          </div>
-
-          <div>
-            <label for="parent" class="form-label">Parent Folder</label>
-            <select id="parent" bind:value={parentId} class="form-input">
-              <option value="">No parent</option>
-              {#each folders.filter((f) => f.id !== editingId) as folder}
-                <option value={folder.id}>{folder.name}</option>
-              {/each}
-            </select>
-          </div>
-
-          <div>
-            <label for="sortOrder" class="form-label">Sort Order</label>
-            <input type="number" id="sortOrder" bind:value={sortOrder} class="form-input" />
-          </div>
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-4 mt-5">
+        <div>
+          <label for="name" class="field-label">Name</label>
+          <input type="text" id="name" bind:value={name} class="field" required />
         </div>
-
-        <div class="flex justify-end gap-4 mt-6">
-          <button type="button" on:click={cancelForm} class="btn btn-secondary">Cancel</button>
-          <button type="submit" class="btn btn-primary" disabled={saving}>
-            {saving ? 'Saving...' : editingId ? 'Save Changes' : 'Create Folder'}
-          </button>
+        <div>
+          <label for="slug" class="field-label">Slug</label>
+          <input type="text" id="slug" bind:value={slug} class="field font-mono text-[13px]" placeholder="auto-generated" />
         </div>
-      </form>
-    </div>
+        <div>
+          <label for="parent" class="field-label">Parent</label>
+          <select id="parent" bind:value={parentId} class="field">
+            <option value="">No parent</option>
+            {#each folders.filter((f) => f.id !== editingId) as folder}
+              <option value={folder.id}>{folder.name}</option>
+            {/each}
+          </select>
+        </div>
+        <div>
+          <label for="sortOrder" class="field-label">Sort order</label>
+          <input type="number" id="sortOrder" bind:value={sortOrder} class="field" />
+        </div>
+      </div>
+
+      <div class="flex justify-end gap-2 mt-6">
+        <button type="button" on:click={cancelForm} class="btn-ghost">Cancel</button>
+        <button type="submit" class="btn-primary" disabled={saving}>
+          {saving ? 'Saving…' : editingId ? 'Save' : 'Create'}
+        </button>
+      </div>
+    </form>
   {/if}
 
-  <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+  <div class="card overflow-hidden mt-6">
     {#if folders.length === 0}
-      <div class="p-8 text-center text-gray-500">
-        No folders yet. <button on:click={startCreate} class="text-primary-600 hover:underline">Create your first folder</button>.
-      </div>
+      <p class="px-5 py-10 text-center text-sm text-faint">
+        No folders yet. <button on:click={startCreate} class="text-accent hover:underline">Create one</button>.
+      </p>
     {:else}
-      <table class="w-full">
-        <thead>
-          <tr class="border-b border-gray-200 bg-gray-50">
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Name</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Slug</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Parent</th>
-            <th class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider">Order</th>
-            <th class="px-6 py-3 text-right text-xs font-medium text-gray-500 uppercase tracking-wider">Actions</th>
-          </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-200">
-          {#each folders as folder}
-            <tr class="hover:bg-gray-50">
-              <td class="px-6 py-4 whitespace-nowrap font-medium text-gray-900">{folder.name}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-gray-500">{folder.slug}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-gray-500">{getParentName(folder.parent_id)}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-gray-500">{folder.sort_order}</td>
-              <td class="px-6 py-4 whitespace-nowrap text-right">
-                <button on:click={() => startEdit(folder)} class="text-primary-600 hover:text-primary-700 mr-4">
-                  Edit
-                </button>
-                <button on:click={() => handleDelete(folder)} class="text-red-600 hover:text-red-700">
-                  Delete
-                </button>
-              </td>
+      <div class="overflow-x-auto">
+        <table class="w-full text-sm">
+          <thead>
+            <tr class="text-left text-xs text-faint">
+              <th class="px-5 py-3 font-medium">Name</th>
+              <th class="px-5 py-3 font-medium">Slug</th>
+              <th class="hidden md:table-cell px-5 py-3 font-medium">Parent</th>
+              <th class="hidden md:table-cell px-5 py-3 font-medium">Order</th>
+              <th class="px-5 py-3"></th>
             </tr>
-          {/each}
-        </tbody>
-      </table>
+          </thead>
+          <tbody>
+            {#each folders as folder (folder.id)}
+              <tr class="border-t border-line hover:bg-ink/[0.02] transition-colors">
+                <td class="px-5 py-3.5 whitespace-nowrap font-medium text-ink">{folder.name}</td>
+                <td class="px-5 py-3.5 whitespace-nowrap font-mono text-xs text-muted">{folder.slug}</td>
+                <td class="hidden md:table-cell px-5 py-3.5 whitespace-nowrap text-muted">{getParentName(folder.parent_id)}</td>
+                <td class="hidden md:table-cell px-5 py-3.5 whitespace-nowrap font-mono text-xs text-muted">{folder.sort_order}</td>
+                <td class="px-5 py-3.5 whitespace-nowrap text-right text-[13px]">
+                  <button on:click={() => startEdit(folder)} class="text-muted hover:text-ink mr-4">Edit</button>
+                  <button on:click={() => handleDelete(folder)} class="text-muted hover:text-warn">Delete</button>
+                </td>
+              </tr>
+            {/each}
+          </tbody>
+        </table>
+      </div>
     {/if}
   </div>
 </div>

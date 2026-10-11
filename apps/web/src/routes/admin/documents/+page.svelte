@@ -1,8 +1,7 @@
 <script lang="ts">
   import type { PageData } from './$types';
-  import { goto } from '$app/navigation';
   import { adminApi, type AdminDocument } from '$lib/api';
-  import { formatDateTime } from '$lib/utils/markdown';
+  import DocumentRow from '$lib/components/DocumentRow.svelte';
 
   export let data: PageData;
 
@@ -41,63 +40,58 @@
   <title>Documents - ChronoMD Admin</title>
 </svelte:head>
 
-<div class="p-8">
-  <div class="flex items-center justify-between mb-8">
-    <h1 class="text-2xl font-bold text-gray-900">Documents</h1>
-    <a href="/admin/documents/new" class="btn btn-primary">New Document</a>
+<div class="admin-page">
+  <div class="flex items-center justify-between gap-4">
+    <h1 class="admin-title">Documents</h1>
+    <a href="/admin/documents/new" class="btn-primary">
+      <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4" />
+      </svg>
+      New document
+    </a>
   </div>
 
-  <div class="bg-white rounded-lg shadow-sm border border-gray-200">
+  <p class="mt-2 text-[13px] text-faint">{total} {total === 1 ? 'document' : 'documents'}</p>
+
+  <div class="card overflow-hidden mt-6">
     {#if documents.length === 0}
-      <div class="p-8 text-center text-gray-500">
-        No documents yet. <a href="/admin/documents/new" class="text-primary-600 hover:underline">Create your first document</a>.
-      </div>
+      <p class="px-5 py-10 text-center text-sm text-faint">
+        No documents yet. <a href="/admin/documents/new" class="text-accent hover:underline">Create one</a>.
+      </p>
     {:else}
-      <div class="divide-y divide-gray-200">
-        {#each documents as doc}
-          <div class="px-6 py-4 flex items-center justify-between hover:bg-gray-50">
-            <a href="/admin/documents/{doc.id}" class="flex-1">
-              <div class="font-medium text-gray-900">{doc.title}</div>
-              <div class="text-sm text-gray-500 mt-1">
-                {formatDateTime(doc.updated_at)}
-                {#if doc.folder}
-                  <span class="mx-1">•</span>
-                  <span>{doc.folder.name}</span>
-                {/if}
-              </div>
+      {#each documents as doc (doc.id)}
+        <DocumentRow {doc}>
+          <div class="flex items-center gap-0.5 flex-shrink-0">
+            <a
+              href="/{doc.slug}"
+              target="_blank"
+              class="p-2 rounded-md text-faint hover:text-ink transition-colors"
+              title="View"
+              aria-label="View {doc.title}"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
+              </svg>
             </a>
-            <div class="flex items-center gap-3">
-              {#if doc.is_published}
-                <span class="px-2 py-1 bg-green-100 text-green-700 text-xs rounded-full">Published</span>
-              {:else}
-                <span class="px-2 py-1 bg-gray-100 text-gray-600 text-xs rounded-full">Draft</span>
-              {/if}
-              {#if doc.is_private}
-                <span class="px-2 py-1 bg-amber-100 text-amber-700 text-xs rounded-full">Private</span>
-              {/if}
-              <a href="/{doc.slug}" target="_blank" class="text-gray-400 hover:text-gray-600">
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 6H6a2 2 0 00-2 2v10a2 2 0 002 2h10a2 2 0 002-2v-4M14 4h6m0 0v6m0-6L10 14" />
-                </svg>
-              </a>
-              <button
-                on:click={() => deleteDoc(doc)}
-                class="text-gray-400 hover:text-red-600"
-                disabled={deleting === doc.id}
-              >
-                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
-                </svg>
-              </button>
-            </div>
+            <button
+              on:click={() => deleteDoc(doc)}
+              class="p-2 rounded-md text-faint hover:text-warn transition-colors disabled:opacity-40"
+              disabled={deleting === doc.id}
+              title="Delete"
+              aria-label="Delete {doc.title}"
+            >
+              <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.75" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16" />
+              </svg>
+            </button>
           </div>
-        {/each}
-      </div>
+        </DocumentRow>
+      {/each}
 
       {#if documents.length < total}
-        <div class="px-6 py-4 border-t border-gray-200 text-center">
-          <button on:click={loadMore} class="btn btn-secondary" disabled={loading}>
-            {loading ? 'Loading...' : 'Load more'}
+        <div class="px-5 py-4 border-t border-line text-center">
+          <button on:click={loadMore} class="btn-ghost" disabled={loading}>
+            {loading ? 'Loading…' : 'Load more'}
           </button>
         </div>
       {/if}

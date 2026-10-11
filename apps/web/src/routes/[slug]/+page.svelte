@@ -5,7 +5,8 @@
   import { unlockedDocuments } from '$lib/stores/auth';
   import { onMount } from 'svelte';
   import { theme } from '$lib/stores/theme';
-  import ThemeToggle from '$lib/components/ThemeToggle.svelte';
+  import SiteHeader from '$lib/components/SiteHeader.svelte';
+  import { fullDateTime } from '$lib/utils/time';
 
   export let data: PageData;
 
@@ -33,7 +34,7 @@
         unlockContent = await renderMarkdown(doc.content);
       }
     } catch (err) {
-      unlockError = 'Invalid access code';
+      unlockError = '访问码不正确';
     } finally {
       unlocking = false;
       accessCode = '';
@@ -71,117 +72,75 @@
 </script>
 
 <svelte:head>
-  <title>{doc.title}</title>
+  <title>{doc.title} · {settings.site_title}</title>
   {#if doc.summary}
     <meta name="description" content={doc.summary} />
   {/if}
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/katex@0.16.11/dist/katex.min.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600&display=swap" rel="stylesheet">
 </svelte:head>
 
-<div class="min-h-screen bg-[#FAFAFA] dark:bg-stone-950 transition-colors">
-  <!-- Header -->
-  <header class="h-16 md:h-20 px-5 md:px-12 flex items-center justify-between border-b border-[#E5E5E5] dark:border-stone-800 bg-white dark:bg-stone-900">
-    <a href="/" class="text-xl md:text-2xl font-serif font-semibold text-[#1A1A1A] dark:text-stone-100 no-underline hover:opacity-80 transition">
-      {settings.site_title}
-    </a>
-    <div class="flex items-center gap-4 md:gap-6">
-      <a href="/" class="flex items-center gap-2 text-sm text-[#666666] dark:text-stone-400 hover:text-[#1A1A1A] dark:hover:text-stone-200 transition">
-        <svg class="w-4 h-4 md:w-4 md:h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-        <span class="hidden md:inline">Back</span>
-      </a>
-      <ThemeToggle />
-    </div>
-  </header>
+<div class="min-h-screen bg-canvas">
+  <div class="max-w-[680px] mx-auto px-5 md:px-0 pb-14">
+    <SiteHeader title={settings.site_title} />
 
-  <!-- Article -->
-  <article class="max-w-3xl mx-auto px-5 md:px-6 py-6 md:py-12">
-    <!-- Article Header -->
-    <header class="mb-6 md:mb-10 pb-6 md:pb-8 border-b border-[#E5E5E5] dark:border-stone-800">
-      <h1 class="text-2xl md:text-4xl font-serif font-semibold text-[#1A1A1A] dark:text-stone-100 leading-tight mb-3 md:mb-4">
-        {doc.title}
-      </h1>
-      <div class="flex flex-wrap items-center gap-3 md:gap-4 text-sm">
-        {#if doc.published_at}
-          <time datetime={doc.published_at} class="font-mono text-xs text-[#888888] dark:text-stone-500">
-            {new Date(doc.published_at).toLocaleDateString('en-US', { year: 'numeric', month: 'long', day: 'numeric' })}
-          </time>
-        {/if}
-        {#if doc.folder}
-          <span class="w-1 h-1 rounded-full bg-[#E5E5E5] dark:bg-stone-600"></span>
-          <span class="text-sm text-[#0D6E6E] dark:text-teal-400">{doc.folder.name}</span>
-        {/if}
-        {#if doc.is_private}
-          <span class="inline-flex items-center gap-1.5 text-amber-500 text-sm">
-            <svg class="w-3.5 h-3.5" fill="currentColor" viewBox="0 0 20 20">
-              <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
-            </svg>
-            Private
-          </span>
-        {/if}
-      </div>
-    </header>
+    <a href="/" class="text-[13px] text-faint hover:text-ink transition-colors">← 时间流</a>
 
-    {#if doc.is_locked && !unlockContent}
-      <!-- Unlock Form -->
-      <div class="py-12 md:py-16 text-center">
-        <div class="w-14 md:w-16 h-14 md:h-16 rounded-full bg-[#F0F0F0] dark:bg-stone-800 flex items-center justify-center mx-auto mb-5 md:mb-6">
-          <svg class="w-7 md:w-8 h-7 md:h-8 text-[#888888] dark:text-stone-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 15v2m-6 4h12a2 2 0 002-2v-6a2 2 0 00-2-2H6a2 2 0 00-2 2v6a2 2 0 002 2zm10-10V7a4 4 0 00-8 0v4h8z" />
-          </svg>
-        </div>
-        <p class="text-[#666666] dark:text-stone-400 mb-5 md:mb-6">Access code required to view content</p>
-
-        <form on:submit|preventDefault={handleUnlock} class="max-w-xs mx-auto px-4 md:px-0">
-          <input
-            type="password"
-            bind:value={accessCode}
-            placeholder="Enter access code"
-            class="w-full px-4 py-3 bg-white dark:bg-stone-900 border border-[#E5E5E5] dark:border-stone-700 rounded-lg text-center focus:outline-none focus:border-[#0D6E6E] dark:focus:border-teal-500 transition text-[#1A1A1A] dark:text-stone-200"
-            disabled={unlocking}
-          />
-          {#if unlockError}
-            <p class="text-red-500 text-sm mt-2">{unlockError}</p>
+    <article>
+      <header class="pt-6 md:pt-8 pb-7 md:pb-8 border-b border-line">
+        <div class="flex flex-wrap items-center gap-x-2.5 gap-y-1 text-xs">
+          {#if doc.published_at}
+            <time datetime={doc.published_at} class="font-mono text-faint">
+              {fullDateTime(doc.published_at, settings.timezone)}
+            </time>
           {/if}
-          <button
-            type="submit"
-            class="w-full mt-4 px-4 py-3 bg-[#0D6E6E] text-white text-sm font-medium rounded-lg hover:bg-[#0a5a5a] transition disabled:opacity-50"
-            disabled={unlocking}
-          >
-            {unlocking ? 'Verifying...' : 'Unlock'}
-          </button>
-        </form>
-      </div>
-    {:else}
-      <!-- Content -->
-      <div class="prose prose-stone dark:prose-invert prose-base md:prose-lg max-w-none
-        prose-headings:font-serif prose-headings:font-semibold
-        prose-h2:text-xl md:prose-h2:text-2xl prose-h2:mt-8 md:prose-h2:mt-10 prose-h2:mb-3 md:prose-h2:mb-4
-        prose-h3:text-lg md:prose-h3:text-xl prose-h3:mt-6 md:prose-h3:mt-8 prose-h3:mb-2 md:prose-h3:mb-3
-        prose-p:leading-relaxed prose-p:text-[#666666] dark:prose-p:text-stone-400
-        prose-a:text-[#0D6E6E] dark:prose-a:text-teal-400 prose-a:underline prose-a:underline-offset-2
-        prose-strong:font-medium prose-strong:text-[#1A1A1A] dark:prose-strong:text-stone-200
-        prose-code:font-normal prose-code:text-sm prose-code:before:content-none prose-code:after:content-none
-        prose-pre:bg-[#1E293B] prose-pre:rounded-lg prose-pre:p-4 md:prose-pre:p-5 prose-pre:overflow-x-auto
-        prose-blockquote:font-normal prose-blockquote:border-l-[#0D6E6E] prose-blockquote:text-[#666666] dark:prose-blockquote:text-stone-400
-        prose-img:rounded-xl
-      ">
-        {@html displayContent}
-      </div>
-    {/if}
-  </article>
+          {#if doc.folder}
+            <span class="text-faint">·</span>
+            <span class="text-accent">{doc.folder.name}</span>
+          {/if}
+          {#if doc.is_private}
+            <span class="text-faint">·</span>
+            <span class="inline-flex items-center gap-1 text-faint">
+              <svg class="w-[11px] h-[11px]" fill="currentColor" viewBox="0 0 20 20">
+                <path fill-rule="evenodd" d="M5 9V7a5 5 0 0110 0v2a2 2 0 012 2v5a2 2 0 01-2 2H5a2 2 0 01-2-2v-5a2 2 0 012-2zm8-2v2H7V7a3 3 0 016 0z" clip-rule="evenodd"/>
+              </svg>
+              私密
+            </span>
+          {/if}
+        </div>
+        <h1 class="mt-3.5 font-serif text-[28px] md:text-[34px] font-semibold leading-tight text-ink">
+          {doc.title}
+        </h1>
+      </header>
 
-  <!-- Footer -->
-  <footer class="py-6 md:py-8 border-t border-[#E5E5E5] dark:border-stone-800">
-    <div class="max-w-3xl mx-auto px-5 md:px-6 text-center">
-      <a href="/" class="inline-flex items-center gap-2 text-sm text-[#888888] dark:text-stone-500 hover:text-[#0D6E6E] dark:hover:text-teal-400 transition">
-        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M10 19l-7-7m0 0l7-7m-7 7h18" />
-        </svg>
-        Back to timeline
-      </a>
-    </div>
-  </footer>
+      {#if doc.is_locked && !unlockContent}
+        <div class="py-16 md:py-20 text-center">
+          <p class="text-sm text-muted">这条记录需要访问码</p>
+          <form on:submit|preventDefault={handleUnlock} class="max-w-[260px] mx-auto mt-6 flex flex-col gap-3">
+            <input
+              type="password"
+              bind:value={accessCode}
+              placeholder="访问码"
+              aria-label="访问码"
+              class="field h-10 text-center"
+              disabled={unlocking}
+            />
+            {#if unlockError}
+              <p class="text-xs text-warn">{unlockError}</p>
+            {/if}
+            <button type="submit" class="btn-primary h-10" disabled={unlocking}>
+              {unlocking ? '验证中…' : '解锁'}
+            </button>
+          </form>
+        </div>
+      {:else}
+        <div class="prose prose-base md:prose-lg max-w-none pt-8 md:pt-9 prose-p:leading-[1.85] prose-img:rounded-xl">
+          {@html displayContent}
+        </div>
+      {/if}
+    </article>
+
+    <footer class="mt-14 pt-6 border-t border-line">
+      <a href="/" class="text-[13px] text-muted hover:text-ink transition-colors">← 回到时间流</a>
+    </footer>
+  </div>
 </div>

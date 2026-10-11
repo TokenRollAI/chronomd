@@ -19,8 +19,10 @@ export const GET: RequestHandler = async ({ url, cookies, platform }) => {
 
   const page = parseInt(url.searchParams.get('page') || '1');
   const limit = parseInt(url.searchParams.get('limit') || '20');
+  const publishedParam = url.searchParams.get('published');
+  const published = publishedParam === null ? undefined : publishedParam === 'true';
 
-  const result = await getAdminDocuments(env.DB, { page, limit });
+  const result = await getAdminDocuments(env.DB, { page, limit, published });
   return json({ success: true, data: result });
 };
 

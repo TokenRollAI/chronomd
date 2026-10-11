@@ -29,39 +29,36 @@
   <title>Login - ChronoMD Admin</title>
 </svelte:head>
 
-<div class="min-h-screen bg-gray-100 flex items-center justify-center px-4">
-  <div class="max-w-md w-full">
-    <div class="bg-white rounded-lg shadow-lg p-8">
-      <div class="text-center mb-8">
-        <h1 class="text-2xl font-bold text-gray-900">ChronoMD</h1>
-        <p class="text-gray-600 mt-1">Admin Login</p>
-      </div>
+<div class="min-h-screen bg-canvas flex items-center justify-center px-5">
+  <div class="w-full max-w-[320px]">
+    <div class="text-center">
+      <h1 class="font-serif text-2xl font-semibold text-ink">ChronoMD</h1>
+      <p class="mt-1 text-[13px] text-faint">Admin</p>
+    </div>
 
-      <form on:submit={handleLogin}>
-        <div class="mb-4">
-          <label for="password" class="form-label">Password</label>
-          <input
-            type="password"
-            id="password"
-            bind:value={password}
-            class="form-input"
-            placeholder="Enter admin password"
-            disabled={loading}
-          />
-        </div>
+    <form on:submit={handleLogin} class="mt-8 flex flex-col gap-3">
+      <input
+        type="password"
+        id="password"
+        bind:value={password}
+        class="field h-10"
+        placeholder="Password"
+        aria-label="Password"
+        autocomplete="current-password"
+        disabled={loading}
+      />
 
-        {#if error}
-          <p class="text-red-600 text-sm mb-4">{error}</p>
-        {/if}
+      {#if error}
+        <p class="text-xs text-warn">{error}</p>
+      {/if}
 
-        <button type="submit" class="btn btn-primary w-full" disabled={loading}>
-          {loading ? 'Logging in...' : 'Login'}
-        </button>
-      </form>
+      <button type="submit" class="btn-primary h-10" disabled={loading}>
+        {loading ? 'Logging in…' : 'Login'}
+      </button>
+    </form>
 
-      <div class="mt-6 text-center">
-        <a href="/" class="text-sm text-gray-500 hover:text-gray-700">← Back to site</a>
-      </div>
+    <div class="mt-8 text-center">
+      <a href="/" class="text-[13px] text-faint hover:text-ink transition-colors">← Back to site</a>
     </div>
   </div>
 </div>

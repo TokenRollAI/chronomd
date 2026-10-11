@@ -70,7 +70,7 @@ export const adminApi = {
   logout: () =>
     request<{ message: string }>('/api/admin/logout', { method: 'POST' }),
 
-  getDocuments: (params?: { page?: number; limit?: number }) =>
+  getDocuments: (params?: { page?: number; limit?: number; published?: boolean }) =>
     request<{ items: AdminDocument[]; total: number }>('/api/admin/documents', { params }),
 
   getDocument: (id: string) =>
@@ -184,6 +184,7 @@ export interface AdminDocument {
   slug: string;
   summary: string | null;
   folder_id: string | null;
+  folder?: { id: string; name: string; slug: string } | null;
   is_published: number;
   is_private: number;
   published_at: string | null;
