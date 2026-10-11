@@ -2,7 +2,9 @@
 
 ## 概述
 
-使用 Cloudflare D1 (SQLite) 存储元数据，Schema 定义在 `apps/api/schema.sql`。
+使用 Cloudflare D1 (SQLite) 存储元数据，访问代码集中在 `apps/web/src/lib/server/db.ts`，行类型见 `apps/web/src/lib/server/types.ts`。
+
+**已知缺口:** 仓库中只有 `apps/web/migrations/0002_quick_notes.sql`。`settings` / `folders` / `documents` 三张基础表的建表 SQL **不在仓库中** (旧文档引用的 `apps/api/schema.sql` 在当前代码和 git 历史里都不存在)。下文这三张表的字段与 `db.ts` 中的查询一致，但其索引、约束与默认设置值无法在仓库内核实。新建环境前需先补回基础 schema (或从现有生产 D1 导出)，否则只能建出 `quick_notes` 表。
 
 ## 表结构
 
@@ -68,7 +70,7 @@
 | created_at  | TEXT    | 创建时间             |
 | updated_at  | TEXT    | 更新时间             |
 
-**迁移文件:** `migrations/0002_quick_notes.sql`
+**迁移文件:** `apps/web/migrations/0002_quick_notes.sql` (含索引 `idx_quick_notes_timeline`: is_archived, created_at DESC)
 
 **设计说明:**
 - 独立于 `documents` 表，专为轻量级快速记录设计
@@ -95,11 +97,14 @@ chronomd-storage/
 
 ## 数据迁移
 
-```bash
-# 本地迁移
-cd apps/api
-pnpm db:migrate
+项目没有 `db:migrate` 之类的 npm 脚本，迁移通过 wrangler 直接执行 SQL 文件 (在 `apps/web` 目录下，依赖本地 `wrangler.toml` 的 D1 绑定)：
 
-# 生产迁移
-pnpm db:migrate:prod
+```bash
+cd apps/web
+# 本地
+npx wrangler d1 execute chronomd-db --local --file=migrations/0002_quick_notes.sql
+# 生产
+npx wrangler d1 execute chronomd-db --remote --file=migrations/0002_quick_notes.sql
 ```
+
+基础表 schema 缺失的问题见上文「已知缺口」。

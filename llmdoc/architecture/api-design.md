@@ -2,7 +2,7 @@
 
 ## 概述
 
-API 基于 Hono.js 构建，运行在 Cloudflare Workers 上。采用 RESTful 风格，JSON 格式通信。
+API 由 `apps/web` 内的 SvelteKit server routes (`src/routes/api/**/+server.ts`) 实现，随应用一起部署在 Cloudflare Pages (Workers 运行时)，没有独立的后端服务。采用 RESTful 风格，JSON 格式通信。
 
 ## 响应格式
 
@@ -95,8 +95,8 @@ API 基于 Hono.js 构建，运行在 Cloudflare Workers 上。采用 RESTful �
 ### GET /api/documents/:slug
 获取单个文档详情
 
-### POST /api/documents/:slug/unlock
-解锁私密文档
+### POST /api/documents/:slug
+解锁私密文档 (与 GET 同一路由，无 `/unlock` 子路径)
 
 **请求体:**
 ```json
@@ -107,7 +107,9 @@ API 基于 Hono.js 构建，运行在 Cloudflare Workers 上。采用 RESTful �
 
 ## Admin API
 
-所有 Admin API 需要 JWT 认证。
+除 `login` / `logout` 外，所有 Admin API 需要 JWT 认证。
+
+**认证约定:** 没有全局中间件或 `hooks.server.ts`。每个 admin `+server.ts` 各自定义 `checkAuth`，读取 `auth_token` Cookie 并调用 `verifyToken`，失败返回 401。新增 admin 路由时必须自行加上这一检查，否则端点会公开暴露。
 
 ### POST /api/admin/login
 管理员登录
@@ -126,6 +128,7 @@ API 基于 Hono.js 构建，运行在 Cloudflare Workers 上。采用 RESTful �
 | DELETE | /api/admin/documents/:id  | 删除文档     |
 | GET    | /api/admin/folders        | 文件夹列表   |
 | POST   | /api/admin/folders        | 创建文件夹   |
+| GET    | /api/admin/folders/:id    | 获取文件夹   |
 | PUT    | /api/admin/folders/:id    | 更新文件夹   |
 | DELETE | /api/admin/folders/:id    | 删除文件夹   |
 | GET    | /api/admin/settings       | 获取设置     |
@@ -137,12 +140,14 @@ API 基于 Hono.js 构建，运行在 Cloudflare Workers 上。采用 RESTful �
 |--------|------------------------------|------------------|
 | POST   | /api/admin/quick-notes       | 创建笔记         |
 | GET    | /api/admin/quick-notes       | 获取列表（分页） |
+| GET    | /api/admin/quick-notes/:id   | 获取笔记         |
 | PUT    | /api/admin/quick-notes/:id   | 更新笔记         |
 | DELETE | /api/admin/quick-notes/:id   | 删除笔记         |
 
 ## 源码位置
 
-- 路由入口: `apps/api/src/index.ts`
-- 公开路由: `apps/api/src/routes/public.ts`
-- Admin 路由: `apps/api/src/routes/admin.ts`
-- 认证中间件: `apps/api/src/middleware/auth.ts`
+- 公开路由: `apps/web/src/routes/api/{timeline,mixed-timeline,folders,documents/[slug]}/+server.ts`
+- Admin 路由: `apps/web/src/routes/api/admin/**/+server.ts` (各文件内的 `checkAuth`)
+- JWT 签发/校验: `apps/web/src/lib/server/auth.ts` (`createToken`, `verifyToken`，jose HS256，7 天过期)
+- 密码校验: `apps/web/src/lib/server/utils.ts` (`verifyPassword`，SHA-256 比对 `ADMIN_PASSWORD_HASH`)
+- 数据访问: `apps/web/src/lib/server/db.ts`；类型: `apps/web/src/lib/server/types.ts`

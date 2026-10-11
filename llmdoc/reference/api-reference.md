@@ -2,23 +2,13 @@
 
 ## 基础信息
 
-- **Base URL**: `http://localhost:8787` (开发) / `https://api.yourdomain.com` (生产)
+- **Base URL**: 与站点同源，API 为 `apps/web` 内的 SvelteKit server routes。开发 `http://localhost:5173`，生产 `https://chronomd.pdjjq.org`
 - **Content-Type**: `application/json`
-- **认证**: JWT Token (Cookie 或 Authorization Header)
+- **认证**: JWT Token，仅通过 `auth_token` Cookie 传递 (不读取 `Authorization` Header)。各 admin 路由自行校验，见 [API 设计](../architecture/api-design.md)
 
 ---
 
 ## 公开 API
-
-### GET /health
-健康检查
-
-**响应:**
-```json
-{"status": "ok"}
-```
-
----
 
 ### GET /api/timeline
 获取时间线
@@ -110,8 +100,8 @@
 
 ---
 
-### POST /api/documents/:slug/unlock
-解锁私密文档
+### POST /api/documents/:slug
+解锁私密文档 (与 GET 同一路由)
 
 **请求体:**
 ```json

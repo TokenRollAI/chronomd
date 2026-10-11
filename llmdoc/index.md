@@ -17,7 +17,7 @@ chronomd/
 │       │   │   │   ├── types.ts     # 类型定义 (含 QuickNote, MixedTimelineItem)
 │       │   │   │   └── utils.ts     # 工具函数
 │       │   │   ├── stores/          # Svelte stores
-│       │   │   │   ├── auth.ts      # 认证状态
+│       │   │   │   ├── auth.ts      # 私密文档解锁状态 (unlockedDocuments)
 │       │   │   │   └── theme.ts     # 暗色模式主题状态
 │       │   │   ├── components/      # UI 组件
 │       │   │   │   ├── SiteHeader.svelte      # 前台站点标题 + 主题切换
@@ -36,7 +36,7 @@ chronomd/
 │       ├── migrations/              # 数据库迁移文件
 │       │   └── 0002_quick_notes.sql # Quick Notes 表迁移
 │       ├── static/                   # 静态资源 (PWA 图标等)
-│       └── wrangler.toml            # Cloudflare 配置
+│       └── wrangler.toml.example    # Cloudflare 配置模板 (本地 wrangler.toml 被 gitignore)
 ├── packages/
 │   └── cli/              # @chronomd/cli 命令行工具
 │       ├── src/
@@ -78,5 +78,5 @@ chronomd/
 - **本地开发**: `cd apps/web && pnpm dev`
 - **应用地址**: http://localhost:5173
 - **管理后台**: http://localhost:5173/admin/login
-- **Admin 密码**: 在 `apps/web/wrangler.toml` 中配置
+- **Admin 密码**: 在 `apps/web/wrangler.toml` 中配置 (由 `wrangler.toml.example` 复制)
 - **生产环境**: https://chronomd.pdjjq.org

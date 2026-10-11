@@ -14,3 +14,7 @@ apps/web/wrangler.toml
 # Claude Code local settings (may contain permissions)
 .claude/settings.local.json
 .claude/plans/
+
+# Local agent/tool caches
+.llmdoc-tmp/
+.playwright-mcp/

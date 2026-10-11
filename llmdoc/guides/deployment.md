@@ -8,13 +8,16 @@
 npx wrangler d1 create chronomd-db
 ```
 
-记录返回的 `database_id`，更新到 `apps/web/wrangler.toml`。
+记录返回的 `database_id`，更新到 `apps/web/wrangler.toml` (从 `wrangler.toml.example` 复制，该文件被 gitignore)。
 
 ### 2. 初始化数据库表
 
+> 已知缺口：`settings` / `folders` / `documents` 的基础 schema 不在仓库中，需另行获取后先执行，详见 [数据库设计](../architecture/database-design.md)。
+
 ```bash
 cd apps/web
-npx wrangler d1 execute chronomd-db --remote --file=schema.sql
+# 先执行基础 schema (仓库外获取)，再执行 quick_notes 迁移
+npx wrangler d1 execute chronomd-db --remote --file=migrations/0002_quick_notes.sql
 ```
 
 ### 3. 创建 R2 存储桶

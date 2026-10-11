@@ -16,7 +16,7 @@ pnpm install
 
 ### 2. 配置应用
 
-编辑 `apps/web/wrangler.toml`：
+从模板复制 `apps/web/wrangler.toml.example` 为 `apps/web/wrangler.toml` (后者被 gitignore)，然后编辑：
 
 ```toml
 [vars]
@@ -33,9 +33,12 @@ JWT_SECRET = "your-jwt-secret"
 
 ### 3. 初始化本地数据库
 
+> 已知缺口：`settings` / `folders` / `documents` 的基础 schema 不在仓库中，需要另行获取 (例如从生产 D1 导出) 后先执行，详见 [数据库设计](../architecture/database-design.md)。
+
 ```bash
 cd apps/web
-npx wrangler d1 execute chronomd-db --local --file=schema.sql
+# 先执行基础 schema (仓库外获取)，再执行 quick_notes 迁移
+npx wrangler d1 execute chronomd-db --local --file=migrations/0002_quick_notes.sql
 ```
 
 ### 4. 启动开发服务器
@@ -67,11 +70,7 @@ curl -X POST http://localhost:5173/api/admin/login \
 
 ### D1 数据库错误
 
-确保已初始化本地数据库：
-```bash
-cd apps/web
-npx wrangler d1 execute chronomd-db --local --file=schema.sql
-```
+确保已按第 3 步初始化本地数据库 (基础 schema + `migrations/0002_quick_notes.sql`)。出现 `no such table` 通常是基础 schema 未执行。
 
 ### 登录失败
 
